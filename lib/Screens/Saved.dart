@@ -21,11 +21,12 @@ class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(height: getheight(context, 60)),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
             child: Row(
               children: [
                 Column(
@@ -47,7 +48,7 @@ class _SavedState extends State<Saved> {
             height: getheight(context, 36),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
             child: Column(
               children: [
                 Row(
@@ -113,7 +114,7 @@ class _SavedState extends State<Saved> {
                   height: getheight(context, 14),
                 ),
                 Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
-                // Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
+                Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
               ],
             ),
           ),
@@ -143,7 +144,7 @@ class _QuepaperState extends State<Quepaper> {
       children: [
         Container(
           height: getheight(context, 90),
-          width: getwidth(context, 295),
+          //width: getwidth(context, 295),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: Colors.white),
           child: Row(children: [
@@ -170,33 +171,6 @@ class _QuepaperState extends State<Quepaper> {
                   "2018 VLSI Question Paper",
                   style: TextStyle(
                       fontWeight: FontWeight.w900, color: Colors.blue),
-                ),
-                Spacer(),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: getwidth(context, 135),
-                    ),
-                    IconButton(
-                      constraints: BoxConstraints(),
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        setState(() {
-                          widget._isbookmarked_quepapers =
-                              !widget._isbookmarked_quepapers;
-                        });
-                      },
-                      icon: Icon(
-                        widget._isbookmarked_quepapers
-                            ? Icons.bookmark_outline_sharp
-                            : Icons.bookmark_sharp,
-                        size: getheight(context, 25),
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ],
                 ),
                 SizedBox(
                   height: getheight(context, 10),
@@ -236,7 +210,7 @@ class _NotesState extends State<Notes> {
       children: [
         Container(
           height: getheight(context, 117),
-          width: getwidth(context, 295),
+          //width: getwidth(context, 295),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: Colors.white),
           child: Row(children: [
@@ -244,7 +218,7 @@ class _NotesState extends State<Notes> {
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   height: getheight(context, 117),
-                  width: getwidth(context, 92),
+                  width: getwidth(context, 117),
                   child: Image(
                     image: AssetImage('images/chip.jpg'),
                     fit: BoxFit.fill,

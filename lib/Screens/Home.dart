@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:notio/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -13,12 +11,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: getheight(context, 60)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
               child: Row(
                 children: [
                   Column(
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
             ),
             Container(
               height: getheight(context, 92),
-              margin: EdgeInsets.only(left: getwidth(context, 40)),
+              margin: EdgeInsets.only(left: getwidth(context, 20)),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -96,9 +96,11 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: getheight(context, 40),
             ),
-            Text(
-              "Might be useful",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            Center(
+              child: Text(
+                "Might be useful",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              ),
             )
           ],
         ),
@@ -113,7 +115,7 @@ class Semester extends StatelessWidget {
     return Column(
       children: [
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 5),
+            margin: EdgeInsets.only(right: 10),
             height: getheight(context, 65),
             width: getheight(context, 65),
             decoration: BoxDecoration(

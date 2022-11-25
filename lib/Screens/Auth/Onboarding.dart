@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:notio/widgets.dart';
-import 'package:drop_shadow/drop_shadow.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -10,18 +7,19 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
-  String branch = " ";
-  String sem = " ";
+  String branch = "Branch";
+  String sem = "Semester";
 
-  List<String> branchlist = [" ", "ECE", "IT", "CSE"];
-  List<String> semlist = [" ", "1", "2", "3"];
+  List<String> branchlist = ["Branch", "ECE", "IT", "CSE"];
+  List<String> semlist = ["Semester", "1", "2", "3"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: getheight(context, 60)),
+          SizedBox(height: getheight(context, 65)),
           Container(
             padding: EdgeInsets.symmetric(horizontal: getwidth(context, 23)),
             child: Column(
@@ -39,7 +37,7 @@ class _OnboardingState extends State<Onboarding> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 SizedBox(
-                  height: getheight(context, 50),
+                  height: getheight(context, 30),
                 ),
                 Text(
                   "Select Branch",
