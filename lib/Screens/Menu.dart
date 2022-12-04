@@ -90,7 +90,9 @@ class Menu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 22),
             ),
-            info_containers(context, "Creator Verification", () {}),
+            info_containers(context, "Creator Verification", () {
+              Navigator.pushNamed(context, '/verificationDetails');
+            }),
             SizedBox(
               height: getheight(context, 22),
             ),
