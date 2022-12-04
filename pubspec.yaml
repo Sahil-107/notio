@@ -38,6 +38,7 @@ dependencies:
   drop_shadow: ^0.0.1+4
   carousel_slider: ^4.1.1
   double_back_to_close: ^2.0.0
+  story_view: ^0.14.0
 
 
 dev_dependencies:

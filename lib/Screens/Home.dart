@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notio/Screens/Story/mainPage.dart';
 import 'package:notio/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -114,15 +115,25 @@ class Semester extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-            margin: EdgeInsets.only(right: 10),
-            height: getheight(context, 65),
-            width: getheight(context, 65),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xFF376AED), width: 3),
-              borderRadius: BorderRadius.circular(24),
-              image: DecorationImage(image: AssetImage("images/logo.png")),
-            )),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => storyView(),
+              ),
+            );
+          },
+          child: Container(
+              margin: EdgeInsets.only(right: 10),
+              height: getheight(context, 65),
+              width: getheight(context, 65),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xFF376AED), width: 3),
+                borderRadius: BorderRadius.circular(24),
+                image: DecorationImage(image: AssetImage("images/logo.png")),
+              )),
+        ),
         SizedBox(
           height: 5,
         ),
