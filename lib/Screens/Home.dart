@@ -44,18 +44,34 @@ class _HomeState extends State<Home> {
             ),
             Container(
               height: getheight(context, 92),
-              margin: EdgeInsets.only(left: getwidth(context, 20)),
+              //margin: EdgeInsets.only(left: getwidth(context, 20)),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  Semester(),
-                  Semester(),
-                  Semester(),
-                  Semester(),
-                  Semester(),
-                  Semester(),
-                  Semester(),
-                  Semester(),
+                  Semester(
+                    sem: 1.toString(),
+                  ),
+                  Semester(
+                    sem: 2.toString(),
+                  ),
+                  Semester(
+                    sem: 3.toString(),
+                  ),
+                  Semester(
+                    sem: 4.toString(),
+                  ),
+                  Semester(
+                    sem: 5.toString(),
+                  ),
+                  Semester(
+                    sem: 6.toString(),
+                  ),
+                  Semester(
+                    sem: 7.toString(),
+                  ),
+                  Semester(
+                    sem: 8.toString(),
+                  ),
                 ],
               ),
             ),
@@ -111,6 +127,10 @@ class _HomeState extends State<Home> {
 }
 
 class Semester extends StatelessWidget {
+  Semester({required this.sem});
+
+  String sem;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -125,20 +145,23 @@ class Semester extends StatelessWidget {
             );
           },
           child: Container(
-              margin: EdgeInsets.only(right: 10),
-              height: getheight(context, 65),
-              width: getheight(context, 65),
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFF376AED), width: 3),
-                borderRadius: BorderRadius.circular(24),
-                image: DecorationImage(image: AssetImage("images/logo.png")),
-              )),
+            margin: EdgeInsets.only(right: 5, left: 6),
+            height: getheight(context, 65),
+            width: getheight(context, 65),
+            padding: EdgeInsets.all(5),
+            child: Image(image: AssetImage("images/sem$sem.png")),
+            decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFF376AED), width: 3),
+              borderRadius: BorderRadius.circular(24),
+              //image: DecorationImage(image: AssetImage("images/sem1.png")),
+            ),
+          ),
         ),
         SizedBox(
           height: 5,
         ),
         Text(
-          "Semester 1",
+          "Semester $sem",
           style: TextStyle(fontSize: 10),
         )
       ],

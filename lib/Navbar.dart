@@ -7,7 +7,7 @@ import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
 import 'package:notio/widgets.dart';
 
-import 'Screens/Menu.dart';
+import 'Screens/Menu/Menu.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
