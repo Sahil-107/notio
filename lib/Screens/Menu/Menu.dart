@@ -1,9 +1,6 @@
 // import 'dart:js';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets.dart';
+import '../../widgets.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
@@ -11,6 +8,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.4),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -22,9 +20,11 @@ class Menu extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Menu",
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w700)),
+                      Text(
+                        "Menu",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w700),
+                      ),
                       // SizedBox(height: getheight(context, 10)),
                     ],
                   ),
@@ -39,7 +39,7 @@ class Menu extends StatelessWidget {
             Container(
                 margin: EdgeInsets.symmetric(horizontal: getwidth(context, 24)),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(12),
                     color: Colors.white),
                 child: Column(
                   children: [
@@ -54,7 +54,7 @@ class Menu extends StatelessWidget {
                           width: getwidth(context, 87),
                         ),
                         SizedBox(
-                          height: getheight(context, 15),
+                          width: getwidth(context, 10),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,8 +75,13 @@ class Menu extends StatelessWidget {
                             SizedBox(
                               height: getheight(context, 10),
                             ),
-                            Text("University Institute of Technology"),
-                            SizedBox(height: getheight(context, 30))
+                            Container(
+                              width: getwidth(context, 235),
+                              child: Text("University Institute of Technology"),
+                            ),
+                            SizedBox(
+                              height: getheight(context, 30),
+                            )
                           ],
                         )
                       ],
@@ -84,29 +89,29 @@ class Menu extends StatelessWidget {
                   ],
                 )),
             SizedBox(
-              height: getheight(context, 37),
+              height: getheight(context, 27),
             ),
             info_containers(context, "Purchases", () {}),
             SizedBox(
-              height: getheight(context, 22),
+              height: getheight(context, 18),
             ),
             info_containers(context, "Creator Verification", () {
               Navigator.pushNamed(context, '/verificationDetails');
             }),
             SizedBox(
-              height: getheight(context, 22),
+              height: getheight(context, 18),
             ),
             info_containers(context, "FAQ", () {}),
             SizedBox(
-              height: getheight(context, 22),
+              height: getheight(context, 18),
             ),
             info_containers(context, "Terms and conditions", () {}),
             SizedBox(
-              height: getheight(context, 22),
+              height: getheight(context, 18),
             ),
             info_containers(context, "Logout", () {}),
             SizedBox(
-              height: getheight(context, 90),
+              height: getheight(context, 20),
             )
           ],
         ),
@@ -122,12 +127,11 @@ class Menu extends StatelessWidget {
       },
       child: Center(
         child: Container(
-          margin: EdgeInsets.only(bottom: getwidth(context, 21)),
-          height: getheight(context, 54),
+          padding: EdgeInsets.symmetric(vertical: getheight(context, 22)),
           width: getwidth(context, 315),
           decoration: BoxDecoration(
               color: Color(0xffFFFFFF),
-              borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(12)),
           child: Row(
             children: [
               SizedBox(
