@@ -76,7 +76,7 @@ class Menu extends StatelessWidget {
                               height: getheight(context, 10),
                             ),
                             Container(
-                              width: getwidth(context, 235),
+                              width: getwidth(context, 200),
                               child: Text("University Institute of Technology"),
                             ),
                             SizedBox(
