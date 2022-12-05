@@ -76,7 +76,7 @@ class Menu extends StatelessWidget {
                               height: getheight(context, 10),
                             ),
                             Container(
-                              width: getwidth(context, 235),
+                              width: getwidth(context, 200),
                               child: Text("University Institute of Technology"),
                             ),
                             SizedBox(
@@ -95,7 +95,9 @@ class Menu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 18),
             ),
-            info_containers(context, "Creator Verification", () {}),
+            info_containers(context, "Creator Verification", () {
+              Navigator.pushNamed(context, '/verificationDetails');
+            }),
             SizedBox(
               height: getheight(context, 18),
             ),

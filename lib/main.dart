@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notio/Navbar.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Auth/Onboarding.dart';
+import 'package:notio/Screens/Verification/Verfication2.dart';
+import 'package:notio/Screens/Verification/VerificationDetails.dart';
 import 'Screens/Auth/Login.dart';
 import 'Screens/Home.dart';
 import 'Screens/Saved.dart';
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
           '/home': (context) => Home(),
           '/subjects': (context) => Subject(),
           '/saved': (context) => Saved(),
-          '/navbar': (context) => Navbar()
+          '/navbar': (context) => Navbar(),
+          '/verificationDetails': (context) => Verification(),
+          '/verification2': (context) => Verification2()
         },
         initialRoute: '/loading');
   }
