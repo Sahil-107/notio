@@ -31,7 +31,9 @@ class _NavbarState extends State<Navbar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/creatorProfile');
+        },
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),

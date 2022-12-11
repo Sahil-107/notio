@@ -5,6 +5,7 @@ import 'package:notio/Screens/Auth/Onboarding.dart';
 import 'package:notio/Screens/Verification/underVerificationPage.dart';
 import 'package:notio/Screens/Verification/verificationDetails.dart';
 import 'Screens/Auth/Login.dart';
+import 'Screens/Creator/CreatorProfile.dart';
 import 'Screens/Home.dart';
 import 'Screens/Saved.dart';
 import 'Screens/Subject.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           '/saved': (context) => Saved(),
           '/navbar': (context) => Navbar(),
           '/verificationDetails': (context) => Verification(),
-          '/verification2': (context) => Verification2()
+          '/verification2': (context) => Verification2(),
+          '/creatorProfile': (context) => CreatorProfile()
         },
         initialRoute: '/loading');
   }
