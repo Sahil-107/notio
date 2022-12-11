@@ -47,7 +47,11 @@ class Menu extends StatelessWidget {
                       height: getheight(context, 26),
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          width: getwidth(context, 10),
+                        ),
                         Image(
                           image: AssetImage("images/person.png"),
                           height: getheight(context, 117),
@@ -76,13 +80,21 @@ class Menu extends StatelessWidget {
                               height: getheight(context, 10),
                             ),
                             Container(
-                              width: getwidth(context, 200),
+                              width: getwidth(context, 160),
                               child: Text("University Institute of Technology"),
                             ),
                             SizedBox(
                               height: getheight(context, 30),
                             )
                           ],
+                        ),
+                        Spacer(),
+                        Text(
+                          "Edit",
+                          style: TextStyle(color: Colors.blue, fontSize: 14),
+                        ),
+                        SizedBox(
+                          width: getwidth(context, 20),
                         )
                       ],
                     )

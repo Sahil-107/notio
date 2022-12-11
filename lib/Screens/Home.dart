@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notio/Screens/NoteModule/noteModule.dart';
 import 'package:notio/Screens/Story/mainPage.dart';
 import 'package:notio/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -76,41 +77,25 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(
-            height: getheight(context, 32),
+            height: getheight(context, 22),
           ),
           CarouselSlider(
             options: CarouselOptions(
+                clipBehavior: Clip.none,
                 enableInfiniteScroll: false,
                 enlargeCenterPage: true,
                 viewportFraction: 0.7,
-                height: getheight(context, 270)),
-            items: [1, 2, 3, 4, 5].map((i) {
+                height: getheight(context, 210)),
+            items: [{}, {}, {}].map((i) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Container(
-                    height: getheight(context, 240),
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            spreadRadius: 10,
-                            blurRadius: 5,
-                            offset: Offset(1, 0), // changes position of shadow
-                          ),
-                        ],
-                        image: DecorationImage(
-                            image: AssetImage('images/chip.jpg'),
-                            fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(28)),
-                  );
+                  return noteWidget();
                 },
               );
             }).toList(),
           ),
           SizedBox(
-            height: getheight(context, 40),
+            height: getheight(context, 30),
           ),
           Center(
             child: Text(
@@ -119,44 +104,119 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(
-            height: getheight(context, 27),
+            height: getheight(context, 17),
           ),
           Container(
-            height: getheight(context, 141),
-            margin: EdgeInsets.only(
-                left: getwidth(context, 40), right: getwidth(context, 40)),
-            child: Row(
-              children: [
-                Container(
-                  width: getwidth(context, 92),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/articles.png"))),
-                ),
-                SizedBox(
-                  width: getwidth(context, 20),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "BIG DATA",
-                      style: TextStyle(
-                          color: Color(0xff376AED),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    SizedBox(
-                      height: getwidth(context, 4),
-                    ),
-                    Container(
-                        width: getwidth(context, 160),
-                        child: Text("Why big data needs thick data ?"))
-                  ],
-                )
-              ],
+            height: getheight(context, 200),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ArticleWidget(),
+                  ArticleWidget(),
+                  ArticleWidget(),
+                  ArticleWidget(),
+                ],
+              ),
             ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class noteWidget extends StatelessWidget {
+  const noteWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NoteModule()));
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 4), // changes position of shadow
+              ),
+            ],
+            image: DecorationImage(
+                image: AssetImage('images/chip.jpg'), fit: BoxFit.cover),
+            borderRadius: BorderRadius.circular(28)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(
+                  getwidth(context, 25), 0, 0, getheight(context, 20)),
+              width: getwidth(context, 170),
+              child: Text(
+                "VLSI Technology",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ArticleWidget extends StatelessWidget {
+  const ArticleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: getheight(context, 141),
+      margin: EdgeInsets.only(
+          left: getwidth(context, 40),
+          right: getwidth(context, 40),
+          bottom: getheight(context, 15)),
+      child: Row(
+        children: [
+          Container(
+            width: getwidth(context, 92),
+            decoration: BoxDecoration(
+                image:
+                    DecorationImage(image: AssetImage("images/articles.png"))),
+          ),
+          SizedBox(
+            width: getwidth(context, 20),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "BIG DATA",
+                style: TextStyle(
+                    color: Color(0xff376AED),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800),
+              ),
+              SizedBox(
+                height: getwidth(context, 4),
+              ),
+              Container(
+                  width: getwidth(context, 160),
+                  child: Text("Why big data needs thick data ?"))
+            ],
           )
         ],
       ),
