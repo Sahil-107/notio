@@ -32,7 +32,7 @@ class _NavbarState extends State<Navbar> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, '/creatorProfile');
+          Navigator.pushNamed(context, '/creatorMenu');
         },
       ),
       bottomNavigationBar: BottomAppBar(
