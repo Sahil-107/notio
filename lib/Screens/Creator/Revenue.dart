@@ -11,8 +11,7 @@ class Revenue extends StatefulWidget {
 class _RevenueState extends State<Revenue> {
   DateTime now = DateTime.now();
 
-  String _displayMonth = DateTime.now().month.toString();
-
+  String _displayMonth = DateFormat.MMMM().format(DateTime.now());
   String _displayYear = DateTime.now().year.toString();
 
   int orders = 0;
@@ -26,7 +25,12 @@ class _RevenueState extends State<Revenue> {
       ChartData(2011, 28),
       ChartData(2012, 34),
       ChartData(2013, 32),
-      ChartData(2014, 40)
+      ChartData(2014, 40),
+      ChartData(2015, 35),
+      ChartData(2016, 28),
+      ChartData(2017, 34),
+      ChartData(2018, 32),
+      ChartData(2019, 40)
     ];
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.96),
