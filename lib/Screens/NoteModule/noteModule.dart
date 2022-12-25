@@ -34,12 +34,13 @@ class _NoteModuleState extends State<NoteModule> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        height: getheight(context, 700),
+        height: MediaQuery.of(context).size.height * 1,
         child: PDF(
           enableSwipe: true,
           swipeHorizontal: true,
           autoSpacing: false,
           pageFling: false,
+          nightMode: false,
           onError: (error) {
             print(error.toString());
           },
@@ -47,7 +48,7 @@ class _NoteModuleState extends State<NoteModule> {
             print('$page: ${error.toString()}');
           },
         ).cachedFromUrl(
-            'https://firebasestorage.googleapis.com/v0/b/stackx-24edc.appspot.com/o/4425984?alt=media&token=2a845cd0-aae6-4ee5-b08b-6a7ddb2c6ef1'),
+            'https://firebasestorage.googleapis.com/v0/b/stackx-24edc.appspot.com/o/1.VLSI%20DESIGN.pdf?alt=media&token=6b46c7d8-4f2e-4102-bd2b-14a05ceefffc'),
       ),
     );
   }

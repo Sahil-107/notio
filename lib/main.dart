@@ -44,6 +44,6 @@ class MyApp extends StatelessWidget {
           '/newContribution': (context) => NewContribution(),
           '/revenue': (context) => Revenue()
         },
-        initialRoute: '/loading');
+        initialRoute: '/testing');
   }
 }

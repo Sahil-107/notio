@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
                 enableInfiniteScroll: false,
                 enlargeCenterPage: true,
                 viewportFraction: 0.7,
-                height: getheight(context, 210)),
+                height: getheight(context, 260)),
             items: [{}, {}, {}].map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -192,6 +192,7 @@ class ArticleWidget extends StatelessWidget {
         children: [
           Container(
             width: getwidth(context, 92),
+            height: getheight(context, 121),
             decoration: BoxDecoration(
                 image:
                     DecorationImage(image: AssetImage("images/articles.png"))),
