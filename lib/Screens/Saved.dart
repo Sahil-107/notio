@@ -241,7 +241,7 @@ class _NotesState extends State<Notes> {
                 SizedBox(
                   height: 4,
                 ),
-                Text("by Rashmi"),
+                Text("by Rahul"),
                 Spacer(),
                 Row(
                   mainAxisSize: MainAxisSize.min,

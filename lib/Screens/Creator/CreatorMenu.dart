@@ -7,7 +7,7 @@ class CreatorMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.4),
+      backgroundColor: Colors.white.withOpacity(0.96),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -90,7 +90,9 @@ class CreatorMenu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 27),
             ),
-            info_containers(context, "Purchases", () {}),
+            info_containers(context, "Revenue", () {
+              Navigator.pushNamed(context, '/revenue');
+            }),
             SizedBox(
               height: getheight(context, 18),
             ),
