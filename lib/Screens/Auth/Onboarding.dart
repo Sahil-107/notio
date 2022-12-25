@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notio/widgets.dart';
 
@@ -46,35 +47,37 @@ class _OnboardingState extends State<Onboarding> {
                 SizedBox(
                   height: getheight(context, 10),
                 ),
-                DropdownButtonFormField<String>(
-                  menuMaxHeight: 260,
-                  value: branch,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(color: Colors.black, width: 0.2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(color: Colors.black, width: 0.2),
-                      ),
-                      // filled: true,
-                      fillColor: Colors.white),
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  elevation: 16,
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                  onChanged: (newValue) {
-                    setState(() {
-                      branch = newValue!;
-                    });
-                  },
-                  items: branchlist.map<DropdownMenuItem<String>>((value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Material(
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(25),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: branch,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    onChanged: (newValue) {
+                      setState(() {
+                        branch = newValue!;
+                      });
+                    },
+                    items: branchlist.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(
                   height: getheight(context, 13),
@@ -86,40 +89,42 @@ class _OnboardingState extends State<Onboarding> {
                 SizedBox(
                   height: getheight(context, 10),
                 ),
-                DropdownButtonFormField<String>(
-                  menuMaxHeight: 260,
-                  value: sem,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(color: Colors.black, width: 0.2),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(color: Colors.black, width: 0.2),
-                      ),
-                      // filled: true,
-                      fillColor: Colors.white),
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  elevation: 16,
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                  onChanged: (newValue) {
-                    setState(() {
-                      sem = newValue!;
-                    });
-                  },
-                  items: semlist.map<DropdownMenuItem<String>>((value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Material(
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(25),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: sem,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    onChanged: (newValue) {
+                      setState(() {
+                        sem = newValue!;
+                      });
+                    },
+                    items: semlist.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(
                   height: getheight(context, 25),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/navbar');
                   },
@@ -127,6 +132,14 @@ class _OnboardingState extends State<Onboarding> {
                     height: getheight(context, 60),
                     width: getwidth(context, 215),
                     decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            spreadRadius: 3,
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(12),
                         color: blueColor),
                     child: const Center(

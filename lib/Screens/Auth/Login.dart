@@ -48,6 +48,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 topLeft: Radius.circular(28),
                 topRight: Radius.circular(28),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 8,
+                  blurRadius: 15,
+                  offset: Offset(0, 4),
+                ),
+              ],
               color: blueColor,
             ),
             height: getheight(context, 620),
@@ -78,6 +86,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     // width: double.infinity,
                     // height: MediaQuery.of(context).size.height,
                     decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 8,
+                          blurRadius: 5,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
                       color: Colors.white,
                       borderRadius: new BorderRadius.vertical(
                         top: Radius.elliptical(28, 28),
@@ -196,6 +212,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   height: getheight(context, 60),
                                   width: getwidth(context, 295),
                                   decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.25),
+                                          spreadRadius: 3,
+                                          blurRadius: 8,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
                                       borderRadius: BorderRadius.circular(12),
                                       color: blueColor),
                                   child: const Center(
@@ -453,6 +477,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     height: getheight(context, 60),
                                     width: getwidth(context, 295),
                                     decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                            spreadRadius: 3,
+                                            blurRadius: 8,
+                                            offset: Offset(0, 4),
+                                          ),
+                                        ],
                                         borderRadius: BorderRadius.circular(12),
                                         color: blueColor),
                                     child: const Center(
