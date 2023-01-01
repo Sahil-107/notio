@@ -5,7 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:notio/Screens/Auth/Login.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);

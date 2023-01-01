@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 class Onboarding extends StatefulWidget {
   @override

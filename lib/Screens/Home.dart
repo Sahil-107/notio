@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notio/Screens/NoteModule/noteModule.dart';
 import 'package:notio/Screens/Story/mainPage.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {

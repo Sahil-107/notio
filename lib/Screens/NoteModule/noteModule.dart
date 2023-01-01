@@ -3,7 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 class NoteModule extends StatefulWidget {
   const NoteModule({Key? key}) : super(key: key);

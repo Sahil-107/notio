@@ -5,6 +5,7 @@ import 'package:notio/Screens/Auth/Onboarding.dart';
 import 'package:notio/Screens/Creator/CreatorMenu.dart';
 import 'package:notio/Screens/Creator/NewContribution.dart';
 import 'package:notio/Screens/Creator/Revenue.dart';
+import 'package:notio/Screens/Creator/newPost.dart';
 import 'package:notio/Screens/Verification/underVerificationPage.dart';
 import 'package:notio/Screens/Verification/verificationDetails.dart';
 import 'Screens/Auth/Login.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
           '/creatorProfile': (context) => CreatorProfile(),
           '/creatorMenu': (context) => CreatorMenu(),
           '/newContribution': (context) => NewContribution(),
-          '/revenue': (context) => Revenue()
+          '/revenue': (context) => Revenue(),
+          '/testing': (context) => newPost()
         },
         initialRoute: '/testing');
   }

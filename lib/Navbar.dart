@@ -5,7 +5,7 @@ import 'package:notio/Screens/Home.dart';
 import 'package:notio/Screens/Saved.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 import 'Screens/Menu/Menu.dart';
 

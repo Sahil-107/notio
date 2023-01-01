@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/foundation/key.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 import 'package:story_view/story_view.dart';
 
 class storyView extends StatefulWidget {
