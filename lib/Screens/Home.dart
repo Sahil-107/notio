@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:notio/Screens/NoteModule/noteModule.dart';
 import 'package:notio/Screens/Story/mainPage.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
@@ -45,7 +47,8 @@ class _HomeState extends State<Home> {
           // ),
           Container(
             height: getheight(context, 92),
-            //margin: EdgeInsets.only(left: getwidth(context, 20)),
+            margin: EdgeInsets.only(
+                left: getwidth(context, 10), right: getwidth(context, 10)),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
@@ -134,8 +137,9 @@ class noteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => NoteModule()));
+        Get.to(NoteModule());
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => NoteModule()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

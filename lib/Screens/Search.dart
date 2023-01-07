@@ -2,7 +2,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
-import 'package:notio/widgets.dart';
+
+import '../utility.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);

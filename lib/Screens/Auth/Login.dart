@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -328,7 +328,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                           color: Colors.grey.withOpacity(0.5))),
                                 ),
                                 SizedBox(
-                                  height: getheight(context, 8),
+                                  height: getheight(context, 10),
                                 ),
                                 Row(
                                   children: [
@@ -341,7 +341,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     ),
                                     SizedBox(width: 10),
                                     Container(
-                                      width: getwidth(context, 200),
+                                      width: getwidth(context, 225),
                                       child: TextFormField(
                                           validator: (value) {
                                             if (value.toString().length != 10) {
@@ -366,13 +366,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: getheight(context, 15),
+                                  height: getheight(context, 10),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 5),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: Colors.grey)),
+                                    border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.grey, width: 1.0),
+                                    ),
+                                  ),
                                   child: DropdownButton<String>(
                                     menuMaxHeight: 260,
                                     isExpanded: true,

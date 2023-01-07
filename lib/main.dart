@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notio/Navbar.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Auth/Onboarding.dart';
 import 'package:notio/Screens/Creator/CreatorMenu.dart';
 import 'package:notio/Screens/Creator/NewContribution.dart';
 import 'package:notio/Screens/Creator/Revenue.dart';
+import 'package:notio/Screens/Creator/newPost.dart';
 import 'package:notio/Screens/Verification/underVerificationPage.dart';
 import 'package:notio/Screens/Verification/verificationDetails.dart';
 import 'Screens/Auth/Login.dart';
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: "Notio",
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xFFE5E5E5),
@@ -42,8 +44,9 @@ class MyApp extends StatelessWidget {
           '/creatorProfile': (context) => CreatorProfile(),
           '/creatorMenu': (context) => CreatorMenu(),
           '/newContribution': (context) => NewContribution(),
-          '/revenue': (context) => Revenue()
+          '/revenue': (context) => Revenue(),
+          '/testing': (context) => newPost()
         },
-        initialRoute: '/login');
+        initialRoute: '/loading');
   }
 }

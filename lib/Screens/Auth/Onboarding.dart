@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:notio/widgets.dart';
+import 'package:notio/utility.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -116,7 +116,7 @@ class _OnboardingState extends State<Onboarding> {
                   color: Colors.grey,
                 ),
                 SizedBox(
-                  height: getheight(context, 25),
+                  height: getheight(context, 45),
                 ),
                 InkWell(
                   onTap: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets.dart';
+import '../../utility.dart';
 
 class Verification2 extends StatelessWidget {
   const Verification2({Key? key}) : super(key: key);
