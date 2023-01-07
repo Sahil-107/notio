@@ -104,9 +104,13 @@ class CreatorMenu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 18),
             ),
-            info_containers(context, "Logout", () {}),
+            Image(
+                image: AssetImage("images/logout.png"),
+                height: getheight(context, 65),
+                width: getheight(context, 65)),
+            // info_containers(context, "Logout", () {}),
             SizedBox(
-              height: getheight(context, 20),
+              height: getheight(context, 60),
             )
           ],
         ),

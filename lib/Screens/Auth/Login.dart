@@ -146,16 +146,16 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    border: InputBorder.none,
+                                    // border: InputBorder.none,
                                     hintText: "Enter Email",
                                     hintStyle: TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey.withOpacity(0.5))),
                               ),
-                              Divider(
-                                thickness: 2,
-                                color: blueColor,
-                              ),
+                              // Divider(
+                              //   thickness: 2,
+                              //   color: blueColor,
+                              // ),
                               SizedBox(
                                 height: getheight(context, 20),
                               ),
@@ -193,16 +193,16 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                                 : Icons.visibility_off,
                                             color: Colors.grey,
                                           )),
-                                      border: InputBorder.none,
+                                      // border: InputBorder.none,
                                       hintText: "Enter Password",
                                       hintStyle: TextStyle(
                                           fontSize: 16,
                                           color:
                                               Colors.grey.withOpacity(0.5)))),
-                              Divider(
-                                thickness: 2,
-                                color: blueColor,
-                              ),
+                              // Divider(
+                              //   thickness: 2,
+                              //   color: blueColor,
+                              // ),
                               SizedBox(height: getheight(context, 30)),
                               GestureDetector(
                                 onTap: () {
