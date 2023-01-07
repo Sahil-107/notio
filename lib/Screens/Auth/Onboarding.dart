@@ -49,7 +49,7 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 Material(
                   elevation: 1,
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(10),
                   child: DropdownButtonFormField<String>(
                     menuMaxHeight: 260,
                     value: branch,
@@ -91,7 +91,7 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 Material(
                   elevation: 1,
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(10),
                   child: DropdownButtonFormField<String>(
                     menuMaxHeight: 260,
                     value: sem,
@@ -122,7 +122,7 @@ class _OnboardingState extends State<Onboarding> {
                   ),
                 ),
                 SizedBox(
-                  height: getheight(context, 25),
+                  height: getheight(context, 45),
                 ),
                 InkWell(
                   onTap: () {

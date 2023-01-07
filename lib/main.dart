@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notio/Navbar.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Auth/Onboarding.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: "Notio",
         theme: ThemeData(
           scaffoldBackgroundColor: Color(0xFFE5E5E5),
@@ -46,6 +47,6 @@ class MyApp extends StatelessWidget {
           '/revenue': (context) => Revenue(),
           '/testing': (context) => newPost()
         },
-        initialRoute: '/testing');
+        initialRoute: '/loading');
   }
 }
