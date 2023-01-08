@@ -29,7 +29,13 @@ class _newPostState extends State<newPost> {
           children: [
             Row(
               children: [
-                Icon(Icons.arrow_back_ios),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.keyboard_arrow_left,
+                      size: getheight(context, 22)),
+                ),
                 SizedBox(
                   width: getwidth(context, 20),
                 ),

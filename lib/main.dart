@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notio/Navbar.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Auth/Onboarding.dart';
+import 'package:notio/Screens/Auth/Otp.dart';
 import 'package:notio/Screens/Creator/CreatorMenu.dart';
 import 'package:notio/Screens/Creator/NewContribution.dart';
 import 'package:notio/Screens/Creator/Revenue.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
           '/creatorMenu': (context) => CreatorMenu(),
           '/newContribution': (context) => NewContribution(),
           '/revenue': (context) => Revenue(),
-          '/testing': (context) => newPost()
+          '/testing': (context) => newPost(),
+          '/otp': (context) => OTP()
         },
         initialRoute: '/loading');
   }
