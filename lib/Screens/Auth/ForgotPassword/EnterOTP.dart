@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../../utility.dart';
+import '../../../utility.dart';
 
-class OTP extends StatefulWidget {
+class EnterOTP extends StatefulWidget {
   @override
-  State<OTP> createState() => _OTPState();
+  State<EnterOTP> createState() => _EnterOTPState();
 }
 
-class _OTPState extends State<OTP> {
+class _EnterOTPState extends State<EnterOTP> {
   final TextEditingController _fieldOne = TextEditingController();
   final TextEditingController _fieldTwo = TextEditingController();
   final TextEditingController _fieldThree = TextEditingController();
@@ -43,7 +43,7 @@ class _OTPState extends State<OTP> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Enter OTP",
+                      "Reset Password",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                     ),
@@ -58,18 +58,9 @@ class _OTPState extends State<OTP> {
           SizedBox(
             height: getheight(context, 15),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: getwidth(context, 56)),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "OTP send to {number}",
-              ),
-            ),
-          ),
           SizedBox(height: getheight(context, 40)),
           Image(
-            image: AssetImage("images/otp1.png"),
+            image: AssetImage("images/Password.png"),
             height: getheight(context, 259),
             width: getwidth(context, 173),
           ),
@@ -85,6 +76,16 @@ class _OTPState extends State<OTP> {
           ),
           SizedBox(
             height: 40,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 37)),
+            child: Text(
+              "A 4-Digit Code Has Been Sent To Your Email And Phone Number",
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: getheight(context, 24),
           ),
           GestureDetector(
             onTap: () {
