@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notio/Navbar.dart';
 import 'package:notio/Screens/Auth/ForgotPassword/EnterOTP.dart';
+import 'package:notio/Screens/Auth/ForgotPassword/ResetPassword1.dart';
+import 'package:notio/Screens/Auth/ForgotPassword/ResetPassword2.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Auth/Onboarding.dart';
 import 'package:notio/Screens/Auth/Otp.dart';
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
           '/revenue': (context) => Revenue(),
           '/testing': (context) => newPost(),
           '/otp': (context) => OTP(),
-          '/enterOtp': (context) => EnterOTP()
+          '/enterOtp': (context) => EnterOTP(),
+          '/resetPassword1': (context) => ResetPassword1(),
+          '/resetPassword2': (context) => ResetPassword2(),
         },
         initialRoute: '/loading');
   }
