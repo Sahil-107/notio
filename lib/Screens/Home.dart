@@ -15,12 +15,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xFFF4F7FF)
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
+      backgroundColor: bg,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: getheight(context, 60)),
+            SizedBox(height: getheight(context, 20)),
             Container(
               height: getheight(context, 80),
               padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
@@ -49,7 +53,7 @@ class _HomeState extends State<Home> {
             Container(
               height: getheight(context, 92),
               margin: EdgeInsets.only(
-                  left: getwidth(context, 1), right: getwidth(context, 1)),
+                  left: getwidth(context, 10), right: getwidth(context, 10)),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -89,9 +93,7 @@ class _HomeState extends State<Home> {
                   enableInfiniteScroll: false,
                   enlargeCenterPage: true,
                   viewportFraction: 0.7,
-                  // height: getheight(context, 273),
-                  aspectRatio:
-                      getwidth(context, 236) / getheight(context, 273)),
+                  height: getheight(context, 260)),
               items: [{}, {}, {}].map((i) {
                 return Builder(
                   builder: (BuildContext context) {
@@ -101,43 +103,36 @@ class _HomeState extends State<Home> {
               }).toList(),
             ),
             SizedBox(
-              height: getheight(context, 40),
+              height: getheight(context, 30),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-              child: Row(
-                children: [
-                  Text(
-                    "Might be useful",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
-                  ),
-                  Spacer(),
-                  Text(
-                    "More",
-                    style: TextStyle(color: Color(0xFF376AED)),
-                  )
-                ],
+            Center(
+              child: Text(
+                "Might be useful",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
               ),
             ),
             SizedBox(
               height: getheight(context, 17),
             ),
             Container(
-              height: getheight(context, 600),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ArticleWidget(),
-                    ArticleWidget(),
-                    ArticleWidget(),
-                    ArticleWidget(),
-                    ArticleWidget(),
-                    ArticleWidget(),
-                  ],
-                ),
+              // height: getheight(context, 200),
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hi, Rahul!"),
+                      SizedBox(height: getheight(context, 10)),
+                      Text(
+                        "Welcome back",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Icon(Icons.notifications)
+                ],
               ),
             )
           ],
@@ -207,15 +202,14 @@ class ArticleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        color: Color(0xffFFFFFF),
         boxShadow: [
-          BoxShadow(
-            color: Color(0xFF5282FF).withOpacity(0.6),
-            spreadRadius: 0,
-            blurRadius: 15,
-            offset: Offset(0, 10),
-          ),
+          // BoxShadow(
+          //   color: Colors.black.withOpacity(0.10),
+          //   spreadRadius: 3,
+          //   blurRadius: 8,
+          //   offset: Offset(0, 4),
+          // ),
         ],
       ),
       height: getheight(context, 141),
@@ -286,7 +280,7 @@ class Semester extends StatelessWidget {
             child: Image(image: AssetImage("images/sem$sem.png")),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFF376AED), width: 3),
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(18),
               //image: DecorationImage(image: AssetImage("images/sem1.png")),
             ),
           ),

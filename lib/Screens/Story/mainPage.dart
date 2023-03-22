@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:notio/utility.dart';
 import 'package:story_view/story_view.dart';
+import 'package:http/http.dart' as http;
 
 class storyView extends StatefulWidget {
   const storyView({Key? key}) : super(key: key);
@@ -12,6 +16,27 @@ class storyView extends StatefulWidget {
 }
 
 class _storyViewState extends State<storyView> {
+  @override
+  void initState() {
+    get_data();
+    super.initState();
+  }
+
+  var jj = "";
+
+  Future<void> get_data() async {
+    var res = await http.post(
+        Uri.parse("http://192.168.1.4:8080/userStory/getStories"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({"id": "237642"}));
+    print(jsonDecode(res.body)["Stories"][0]["image"]);
+    setState(() {
+      jj = jsonDecode(res.body)["Stories"][0]["image"];
+    });
+  }
+
   final _controller = StoryController();
 
   @override
@@ -38,6 +63,11 @@ class _storyViewState extends State<storyView> {
                 "https://firebasestorage.googleapis.com/v0/b/notio-2053b.appspot.com/o/IMG_20211110_194301_524.webp?alt=media&token=a80596ce-672b-42ec-a0b8-e2bc14854b91"),
           ),
           duration: Duration(seconds: 200)),
+      // StoryItem(
+      //     Image(
+      //         height: MediaQuery.of(context).size.height,
+      //         image: MemoryImage(Uint8List.fromList(jj.asInt8List()))),
+      //     duration: Duration(seconds: 200)),
     ];
 
     return Scaffold(

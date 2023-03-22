@@ -22,7 +22,7 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [Home(), Saved(), Search1(), Menu()];
+    List<Widget> screens = [Home(), Saved(), Search(), Menu()];
 
     return Scaffold(
       extendBody: true,
