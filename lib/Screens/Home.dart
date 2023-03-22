@@ -15,103 +15,107 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.4),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: getheight(context, 60)),
-          Container(
-            height: getheight(context, 80),
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Hi, Rahul!"),
-                    SizedBox(height: getheight(context, 10)),
-                    Text(
-                      "Welcome back",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.notifications)
-              ],
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
+      backgroundColor: bg,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: getheight(context, 20)),
+            Container(
+              height: getheight(context, 80),
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hi, Rahul!"),
+                      SizedBox(height: getheight(context, 10)),
+                      Text(
+                        "Welcome back",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Icon(Icons.notifications)
+                ],
+              ),
             ),
-          ),
-          // SizedBox(
-          //   height: getheight(context, 25),
-          // ),
-          Container(
-            height: getheight(context, 92),
-            margin: EdgeInsets.only(
-                left: getwidth(context, 10), right: getwidth(context, 10)),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Semester(
-                  sem: 1.toString(),
-                ),
-                Semester(
-                  sem: 2.toString(),
-                ),
-                Semester(
-                  sem: 3.toString(),
-                ),
-                Semester(
-                  sem: 4.toString(),
-                ),
-                Semester(
-                  sem: 5.toString(),
-                ),
-                Semester(
-                  sem: 6.toString(),
-                ),
-                Semester(
-                  sem: 7.toString(),
-                ),
-                Semester(
-                  sem: 8.toString(),
-                ),
-              ],
+            // SizedBox(
+            //   height: getheight(context, 25),
+            // ),
+            Container(
+              height: getheight(context, 92),
+              margin: EdgeInsets.only(
+                  left: getwidth(context, 10), right: getwidth(context, 10)),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Semester(
+                    sem: 1.toString(),
+                  ),
+                  Semester(
+                    sem: 2.toString(),
+                  ),
+                  Semester(
+                    sem: 3.toString(),
+                  ),
+                  Semester(
+                    sem: 4.toString(),
+                  ),
+                  Semester(
+                    sem: 5.toString(),
+                  ),
+                  Semester(
+                    sem: 6.toString(),
+                  ),
+                  Semester(
+                    sem: 7.toString(),
+                  ),
+                  Semester(
+                    sem: 8.toString(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 22),
-          ),
-          CarouselSlider(
-            options: CarouselOptions(
-                clipBehavior: Clip.none,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                viewportFraction: 0.7,
-                height: getheight(context, 260)),
-            items: [{}, {}, {}].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return noteWidget();
-                },
-              );
-            }).toList(),
-          ),
-          SizedBox(
-            height: getheight(context, 30),
-          ),
-          Center(
-            child: Text(
-              "Might be useful",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            SizedBox(
+              height: getheight(context, 22),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 17),
-          ),
-          Container(
-            height: getheight(context, 200),
-            child: SingleChildScrollView(
+            CarouselSlider(
+              options: CarouselOptions(
+                  clipBehavior: Clip.none,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.7,
+                  height: getheight(context, 260)),
+              items: [{}, {}, {}].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return noteWidget();
+                  },
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              height: getheight(context, 30),
+            ),
+            Center(
+              child: Text(
+                "Might be useful",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              ),
+            ),
+            SizedBox(
+              height: getheight(context, 17),
+            ),
+            Container(
+              // height: getheight(context, 200),
               child: Column(
                 children: [
                   ArticleWidget(),
@@ -120,9 +124,9 @@ class _HomeState extends State<Home> {
                   ArticleWidget(),
                 ],
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -188,13 +192,14 @@ class ArticleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Color(0xffFFFFFF),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            spreadRadius: 3,
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          ),
+          // BoxShadow(
+          //   color: Colors.black.withOpacity(0.10),
+          //   spreadRadius: 3,
+          //   blurRadius: 8,
+          //   offset: Offset(0, 4),
+          // ),
         ],
       ),
       height: getheight(context, 141),
@@ -265,7 +270,7 @@ class Semester extends StatelessWidget {
             child: Image(image: AssetImage("images/sem$sem.png")),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFF376AED), width: 3),
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(18),
               //image: DecorationImage(image: AssetImage("images/sem1.png")),
             ),
           ),

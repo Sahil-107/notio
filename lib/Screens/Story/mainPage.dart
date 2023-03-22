@@ -63,11 +63,11 @@ class _storyViewState extends State<storyView> {
                 "https://firebasestorage.googleapis.com/v0/b/notio-2053b.appspot.com/o/IMG_20211110_194301_524.webp?alt=media&token=a80596ce-672b-42ec-a0b8-e2bc14854b91"),
           ),
           duration: Duration(seconds: 200)),
-      StoryItem(
-          Image(
-              height: MediaQuery.of(context).size.height,
-              image: MemoryImage(Uint8List.fromList(jj.asInt8List()))),
-          duration: Duration(seconds: 200)),
+      // StoryItem(
+      //     Image(
+      //         height: MediaQuery.of(context).size.height,
+      //         image: MemoryImage(Uint8List.fromList(jj.asInt8List()))),
+      //     duration: Duration(seconds: 200)),
     ];
 
     return Scaffold(

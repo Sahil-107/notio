@@ -21,7 +21,7 @@ class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xfff9fbff),
       body: Column(
         children: [
           SizedBox(height: getheight(context, 60)),
@@ -212,7 +212,8 @@ class _NotesState extends State<Notes> {
           height: getheight(context, 117),
           //width: getwidth(context, 295),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16), color: Colors.white),
+              borderRadius: BorderRadius.circular(16),
+              color: Color(0xffFFFFFF)),
           child: Row(children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(16),

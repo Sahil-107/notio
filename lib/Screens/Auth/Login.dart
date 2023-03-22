@@ -50,7 +50,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.3 ),
                   spreadRadius: 8,
                   blurRadius: 15,
                   offset: Offset(0, 4),
