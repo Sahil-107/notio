@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         title: "Notio",
         theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xFFE5E5E5),
+          scaffoldBackgroundColor: Color(0xFFF4F7FF),
           fontFamily: "Avenir",
         ),
         routes: {

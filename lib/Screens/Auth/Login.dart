@@ -50,9 +50,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 8,
-                  blurRadius: 15,
+                  color: Color(0xFF4F5B79).withOpacity(0.15),
+                  spreadRadius: 0,
+                  blurRadius: 22,
                   offset: Offset(0, 4),
                 ),
               ],
@@ -88,10 +88,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 8,
-                          blurRadius: 5,
-                          offset: Offset(0, 4),
+                          color: Color(0xFF5282F).withOpacity(0.09),
+                          spreadRadius: 0,
+                          blurRadius: 32,
+                          offset: Offset(0, -25),
                         ),
                       ],
                       color: Colors.white,
@@ -212,14 +212,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   height: getheight(context, 60),
                                   width: getwidth(context, 295),
                                   decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.25),
-                                          spreadRadius: 3,
-                                          blurRadius: 8,
-                                          offset: Offset(0, 4),
-                                        ),
-                                      ],
+                                      // boxShadow: [
+                                      //   BoxShadow(
+                                      //     color: Colors.black.withOpacity(0.25),
+                                      //     spreadRadius: 3,
+                                      //     blurRadius: 8,
+                                      //     offset: Offset(0, 4),
+                                      //   ),
+                                      // ],
                                       borderRadius: BorderRadius.circular(12),
                                       color: blueColor),
                                   child: const Center(
@@ -484,15 +484,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     height: getheight(context, 60),
                                     width: getwidth(context, 295),
                                     decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.25),
-                                            spreadRadius: 3,
-                                            blurRadius: 8,
-                                            offset: Offset(0, 4),
-                                          ),
-                                        ],
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //     color:
+                                        //         Colors.black.withOpacity(0.25),
+                                        //     spreadRadius: 3,
+                                        //     blurRadius: 8,
+                                        //     offset: Offset(0, 4),
+                                        //   ),
+                                        // ],
                                         borderRadius: BorderRadius.circular(12),
                                         color: blueColor),
                                     child: const Center(

@@ -15,114 +15,133 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.4),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: getheight(context, 60)),
-          Container(
-            height: getheight(context, 80),
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Hi, Rahul!"),
-                    SizedBox(height: getheight(context, 10)),
-                    Text(
-                      "Welcome back",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.notifications)
-              ],
-            ),
-          ),
-          // SizedBox(
-          //   height: getheight(context, 25),
-          // ),
-          Container(
-            height: getheight(context, 92),
-            margin: EdgeInsets.only(
-                left: getwidth(context, 10), right: getwidth(context, 10)),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Semester(
-                  sem: 1.toString(),
-                ),
-                Semester(
-                  sem: 2.toString(),
-                ),
-                Semester(
-                  sem: 3.toString(),
-                ),
-                Semester(
-                  sem: 4.toString(),
-                ),
-                Semester(
-                  sem: 5.toString(),
-                ),
-                Semester(
-                  sem: 6.toString(),
-                ),
-                Semester(
-                  sem: 7.toString(),
-                ),
-                Semester(
-                  sem: 8.toString(),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: getheight(context, 22),
-          ),
-          CarouselSlider(
-            options: CarouselOptions(
-                clipBehavior: Clip.none,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                viewportFraction: 0.7,
-                height: getheight(context, 260)),
-            items: [{}, {}, {}].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return noteWidget();
-                },
-              );
-            }).toList(),
-          ),
-          SizedBox(
-            height: getheight(context, 30),
-          ),
-          Center(
-            child: Text(
-              "Might be useful",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
-            ),
-          ),
-          SizedBox(
-            height: getheight(context, 17),
-          ),
-          Container(
-            height: getheight(context, 200),
-            child: SingleChildScrollView(
-              child: Column(
+      // backgroundColor: Color(0xFFF4F7FF)
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: getheight(context, 60)),
+            Container(
+              height: getheight(context, 80),
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Row(
                 children: [
-                  ArticleWidget(),
-                  ArticleWidget(),
-                  ArticleWidget(),
-                  ArticleWidget(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hi, Rahul!"),
+                      SizedBox(height: getheight(context, 10)),
+                      Text(
+                        "Welcome back",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Icon(Icons.notifications)
                 ],
               ),
             ),
-          )
-        ],
+            // SizedBox(
+            //   height: getheight(context, 25),
+            // ),
+            Container(
+              height: getheight(context, 92),
+              margin: EdgeInsets.only(
+                  left: getwidth(context, 1), right: getwidth(context, 1)),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Semester(
+                    sem: 1.toString(),
+                  ),
+                  Semester(
+                    sem: 2.toString(),
+                  ),
+                  Semester(
+                    sem: 3.toString(),
+                  ),
+                  Semester(
+                    sem: 4.toString(),
+                  ),
+                  Semester(
+                    sem: 5.toString(),
+                  ),
+                  Semester(
+                    sem: 6.toString(),
+                  ),
+                  Semester(
+                    sem: 7.toString(),
+                  ),
+                  Semester(
+                    sem: 8.toString(),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: getheight(context, 22),
+            ),
+            CarouselSlider(
+              options: CarouselOptions(
+                  clipBehavior: Clip.none,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.7,
+                  // height: getheight(context, 273),
+                  aspectRatio:
+                      getwidth(context, 236) / getheight(context, 273)),
+              items: [{}, {}, {}].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return noteWidget();
+                  },
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              height: getheight(context, 40),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Row(
+                children: [
+                  Text(
+                    "Might be useful",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                  ),
+                  Spacer(),
+                  Text(
+                    "More",
+                    style: TextStyle(color: Color(0xFF376AED)),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: getheight(context, 17),
+            ),
+            Container(
+              height: getheight(context, 600),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ArticleWidget(),
+                    ArticleWidget(),
+                    ArticleWidget(),
+                    ArticleWidget(),
+                    ArticleWidget(),
+                    ArticleWidget(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -147,10 +166,10 @@ class noteWidget extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 7,
-                offset: Offset(0, 4), // changes position of shadow
+                color: Color(0xFF0D253C).withOpacity(0.44),
+                spreadRadius: 0,
+                blurRadius: 22,
+                offset: Offset(0, 16), // changes position of shadow
               ),
             ],
             image: DecorationImage(
@@ -168,7 +187,7 @@ class noteWidget extends StatelessWidget {
                 "VLSI Technology",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w800),
               ),
             ),
@@ -188,12 +207,14 @@ class ArticleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            spreadRadius: 3,
-            blurRadius: 8,
-            offset: Offset(0, 4),
+            color: Color(0xFF5282FF).withOpacity(0.6),
+            spreadRadius: 0,
+            blurRadius: 15,
+            offset: Offset(0, 10),
           ),
         ],
       ),
@@ -216,13 +237,13 @@ class ArticleWidget extends StatelessWidget {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "BIG DATA",
                 style: TextStyle(
                     color: Color(0xff376AED),
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w800),
               ),
               SizedBox(

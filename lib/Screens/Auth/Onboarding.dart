@@ -126,14 +126,14 @@ class _OnboardingState extends State<Onboarding> {
                     height: getheight(context, 60),
                     width: getwidth(context, 215),
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            spreadRadius: 3,
-                            blurRadius: 8,
-                            offset: Offset(0, 4),
-                          ),
-                        ],
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.black.withOpacity(0.25),
+                        //     spreadRadius: 3,
+                        //     blurRadius: 8,
+                        //     offset: Offset(0, 4),
+                        //   ),
+                        // ],
                         borderRadius: BorderRadius.circular(12),
                         color: blueColor),
                     child: const Center(
