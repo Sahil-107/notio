@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -17,7 +19,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
-        backgroundColor: Colors.blue, // Status bar color
+        backgroundColor: Colors.blue.withOpacity(0.2), // Status bar color
       ),
       backgroundColor: bg,
       body: SingleChildScrollView(
@@ -94,10 +96,16 @@ class _HomeState extends State<Home> {
                   enlargeCenterPage: true,
                   viewportFraction: 0.7,
                   height: getheight(context, 260)),
-              items: [{}, {}, {}].map((i) {
+              items: [
+                {"imageName": "chip"},
+                {"imageName": "chip2"},
+                {"imageName": "chip"}
+              ].map((item) {
                 return Builder(
                   builder: (BuildContext context) {
-                    return noteWidget();
+                    return noteWidget(
+                      imageName: item["imageName"]!,
+                    );
                   },
                 );
               }).toList(),
@@ -133,9 +141,9 @@ class _HomeState extends State<Home> {
 }
 
 class noteWidget extends StatelessWidget {
-  const noteWidget({
-    Key? key,
-  }) : super(key: key);
+  noteWidget({required this.imageName});
+
+  String imageName;
 
   @override
   Widget build(BuildContext context) {
@@ -146,19 +154,20 @@ class noteWidget extends StatelessWidget {
         //     context, MaterialPageRoute(builder: (context) => NoteModule()));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: getwidth(context, 233),
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 7,
-                offset: Offset(0, 4), // changes position of shadow
+                color: Color(0xff0d253c).withOpacity(0.44),
+                spreadRadius: 0,
+                blurRadius: 14,
+                offset: Offset(0, 12), // changes position of shadow
               ),
             ],
             image: DecorationImage(
-                image: AssetImage('images/chip.jpg'), fit: BoxFit.cover),
+                image: AssetImage('images/${imageName}.jpg'),
+                fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(28)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,31 +202,32 @@ class ArticleWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xffFFFFFF),
+        borderRadius: BorderRadius.circular(15),
         boxShadow: [
-          // BoxShadow(
-          //   color: Colors.black.withOpacity(0.10),
-          //   spreadRadius: 3,
-          //   blurRadius: 8,
-          //   offset: Offset(0, 4),
-          // ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
         ],
       ),
       height: getheight(context, 141),
       margin: EdgeInsets.only(
-          left: getwidth(context, 40),
-          right: getwidth(context, 40),
+          left: getwidth(context, 25),
+          right: getwidth(context, 25),
           bottom: getheight(context, 15)),
       child: Row(
         children: [
           Container(
             width: getwidth(context, 92),
-            height: getheight(context, 121),
+            // height: getheight(context, 121),
             decoration: BoxDecoration(
                 image:
                     DecorationImage(image: AssetImage("images/articles.png"))),
           ),
           SizedBox(
-            width: getwidth(context, 20),
+            width: getwidth(context, 25),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -270,7 +280,7 @@ class Semester extends StatelessWidget {
             child: Image(image: AssetImage("images/sem$sem.png")),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFF376AED), width: 3),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(24),
               //image: DecorationImage(image: AssetImage("images/sem1.png")),
             ),
           ),
