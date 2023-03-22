@@ -44,6 +44,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   syncfusion_flutter_charts: ^20.3.61
   get: ^4.6.5
+  http: ^0.13.5
 
 
 dev_dependencies:
