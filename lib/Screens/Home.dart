@@ -169,17 +169,10 @@ class noteWidget extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-<<<<<<< HEAD
-                color: Color(0xFF0D253C).withOpacity(0.44),
-                spreadRadius: 0,
-                blurRadius: 22,
-                offset: Offset(0, 16), // changes position of shadow
-=======
                 color: Color(0xff0d253c).withOpacity(0.44),
                 spreadRadius: 0,
                 blurRadius: 14,
                 offset: Offset(0, 12), // changes position of shadow
->>>>>>> 3e352f9c5eb4acc84c778cb45f262bd4263f88ae
               ),
             ],
             image: DecorationImage(
