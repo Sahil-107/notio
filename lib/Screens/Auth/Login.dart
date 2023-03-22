@@ -240,11 +240,16 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text("Forgot your password?  "),
-                                  Text(
-                                    "Reset here",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: blueColor),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, '/enterOtp');
+                                    },
+                                    child: Text(
+                                      "Reset here",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: blueColor),
+                                    ),
                                   )
                                 ],
                               )

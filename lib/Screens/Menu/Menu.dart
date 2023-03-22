@@ -19,6 +19,9 @@ class Menu extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
               child: Row(
                 children: [
+                  SizedBox(
+                    width: getwidth(context, 20),
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -119,7 +122,9 @@ class Menu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 18),
             ),
-            info_containers(context, "Terms and conditions", () {}),
+            info_containers(context, "Terms and conditions", () {
+              Navigator.pushNamed(context, '/otp');
+            }),
             SizedBox(
               height: getheight(context, 18),
             ),

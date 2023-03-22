@@ -5,6 +5,7 @@ import 'package:notio/Screens/Home.dart';
 import 'package:notio/Screens/Saved.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
+import 'package:notio/Screens/Search1.dart';
 import 'package:notio/utility.dart';
 
 import 'Screens/Menu/Menu.dart';
@@ -21,7 +22,7 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [Home(), Saved(), Search(), Menu()];
+    List<Widget> screens = [Home(), Saved(), Search1(), Menu()];
 
     return Scaffold(
       extendBody: true,

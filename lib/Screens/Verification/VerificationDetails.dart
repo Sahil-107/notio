@@ -22,6 +22,18 @@ class _VerificationState extends State<Verification> {
               padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
               child: Row(
                 children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.keyboard_arrow_left,
+                      size: getheight(context, 22),
+                    ),
+                  ),
+                  SizedBox(
+                    width: getwidth(context, 20),
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
