@@ -1,4 +1,3 @@
-// import 'dart:js';
 import 'package:flutter/material.dart';
 import '../../utility.dart';
 
@@ -8,40 +7,62 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.8,
+        leadingWidth: getwidth(context, 24),
+        // leading: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+        title: Text(
+          "Menu",
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
+        ),
+        backgroundColor: bg,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/notifications');
+            },
+          )
+        ],
+      ),
       backgroundColor: Colors.white.withOpacity(0.4),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: getheight(context, 60)),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: getwidth(context, 20),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Menu",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w700),
-                      ),
-                      // SizedBox(height: getheight(context, 10)),
-                    ],
-                  ),
-                  Spacer(),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/notifications');
-                      },
-                      child: Icon(Icons.notifications))
-                ],
-              ),
-            ),
+            SizedBox(height: getheight(context, 10)),
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+            //   child: Row(
+            //     children: [
+            //       SizedBox(
+            //         width: getwidth(context, 20),
+            //       ),
+            //       Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Text(
+            //             "Menu",
+            //             style: TextStyle(
+            //                 fontSize: 24, fontWeight: FontWeight.w700),
+            //           ),
+            //           // SizedBox(height: getheight(context, 10)),
+            //         ],
+            //       ),
+            //       Spacer(),
+            //       GestureDetector(
+            //           onTap: () {
+            //             Navigator.pushNamed(context, '/notifications');
+            //           },
+            //           child: Icon(Icons.notifications))
+            //     ],
+            //   ),
+            // ),
             SizedBox(
-              height: getheight(context, 30),
+              height: getheight(context, 10),
             ),
             Container(
                 margin: EdgeInsets.symmetric(horizontal: getwidth(context, 24)),
