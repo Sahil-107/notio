@@ -45,7 +45,11 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   Spacer(),
-                  Icon(Icons.notifications)
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/notifications');
+                      },
+                      child: Icon(Icons.notifications))
                 ],
               ),
             ),

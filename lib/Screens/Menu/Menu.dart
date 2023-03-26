@@ -5,8 +5,6 @@ import '../../utility.dart';
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +32,11 @@ class Menu extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  Icon(Icons.notifications)
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/notifications');
+                      },
+                      child: Icon(Icons.notifications))
                 ],
               ),
             ),
