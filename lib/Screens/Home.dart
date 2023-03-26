@@ -22,129 +22,127 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue.withOpacity(0.2), // Status bar color
       ),
       backgroundColor: bg,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: getheight(context, 20)),
-            Container(
-              height: getheight(context, 80),
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Hi, Rahul!"),
-                      SizedBox(height: getheight(context, 10)),
-                      Text(
-                        "Welcome back",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Icon(Icons.notifications)
-                ],
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: getheight(context, 20)),
+          Container(
+            height: getheight(context, 80),
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hi, Rahul!"),
+                    SizedBox(height: getheight(context, 10)),
+                    Text(
+                      "Welcome back",
+                      style: TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w900),
+                    )
+                  ],
+                ),
+                Spacer(),
+                Icon(Icons.notifications)
+              ],
             ),
-            // SizedBox(
-            //   height: getheight(context, 25),
-            // ),
-            Container(
-              height: getheight(context, 92),
-              margin: EdgeInsets.only(
-                  left: getwidth(context, 10), right: getwidth(context, 10)),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Semester(
-                    sem: 1.toString(),
-                  ),
-                  Semester(
-                    sem: 2.toString(),
-                  ),
-                  Semester(
-                    sem: 3.toString(),
-                  ),
-                  Semester(
-                    sem: 4.toString(),
-                  ),
-                  Semester(
-                    sem: 5.toString(),
-                  ),
-                  Semester(
-                    sem: 6.toString(),
-                  ),
-                  Semester(
-                    sem: 7.toString(),
-                  ),
-                  Semester(
-                    sem: 8.toString(),
-                  ),
-                ],
-              ),
+          ),
+          SizedBox(
+            height: getheight(context, 25),
+          ),
+          Container(
+            height: getheight(context, 92),
+            margin: EdgeInsets.only(
+                left: getwidth(context, 10), right: getwidth(context, 10)),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Semester(
+                  sem: 1.toString(),
+                ),
+                Semester(
+                  sem: 2.toString(),
+                ),
+                Semester(
+                  sem: 3.toString(),
+                ),
+                Semester(
+                  sem: 4.toString(),
+                ),
+                Semester(
+                  sem: 5.toString(),
+                ),
+                Semester(
+                  sem: 6.toString(),
+                ),
+                Semester(
+                  sem: 7.toString(),
+                ),
+                Semester(
+                  sem: 8.toString(),
+                ),
+              ],
             ),
-            SizedBox(
-              height: getheight(context, 22),
+          ),
+          SizedBox(
+            height: getheight(context, 22),
+          ),
+          CarouselSlider(
+            options: CarouselOptions(
+                clipBehavior: Clip.none,
+                enableInfiniteScroll: false,
+                enlargeCenterPage: true,
+                viewportFraction: 0.7,
+                height: getheight(context, 260)),
+            items: [
+              {"imageName": "chip"},
+              {"imageName": "chip2"},
+              {"imageName": "chip"}
+            ].map((item) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return noteWidget(
+                    imageName: item["imageName"]!,
+                  );
+                },
+              );
+            }).toList(),
+          ),
+          SizedBox(
+            height: getheight(context, 30),
+          ),
+          Center(
+            child: Text(
+              "Might be useful",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
             ),
-            CarouselSlider(
-              options: CarouselOptions(
-                  clipBehavior: Clip.none,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.7,
-                  height: getheight(context, 260)),
-              items: [
-                {"imageName": "chip"},
-                {"imageName": "chip2"},
-                {"imageName": "chip"}
-              ].map((item) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return noteWidget(
-                      imageName: item["imageName"]!,
-                    );
-                  },
-                );
-              }).toList(),
+          ),
+          SizedBox(
+            height: getheight(context, 17),
+          ),
+          Container(
+            // height: getheight(context, 200),
+            child: Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Hi, Rahul!"),
+                    SizedBox(height: getheight(context, 10)),
+                    Text(
+                      "Welcome back",
+                      style: TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w900),
+                    )
+                  ],
+                ),
+                Spacer(),
+                Icon(Icons.notifications)
+              ],
             ),
-            SizedBox(
-              height: getheight(context, 30),
-            ),
-            Center(
-              child: Text(
-                "Might be useful",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
-              ),
-            ),
-            SizedBox(
-              height: getheight(context, 17),
-            ),
-            Container(
-              // height: getheight(context, 200),
-              child: Column(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Hi, Rahul!"),
-                      SizedBox(height: getheight(context, 10)),
-                      Text(
-                        "Welcome back",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Icon(Icons.notifications)
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
