@@ -5,7 +5,7 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:notio/Screens/NoteModule/stateController.dart';
+
 import 'package:notio/utility.dart';
 
 class NoteModule extends StatefulWidget {
@@ -32,60 +32,73 @@ class _NoteModuleState extends State<NoteModule> {
     super.dispose();
   }
 
-  final notePageController _npc = Get.put(notePageController());
+  Color _bg_color = Colors.white;
+  Color _border_color = Colors.black;
+  bool _dark_mode = false;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-          backgroundColor: _npc.bg,
-          body: Column(
-            children: [
-              SizedBox(
-                height: getheight(context, 70),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: getwidth(context, 26)),
-                child: Row(
-                  children: [
-                    Text(
-                      "VLSI Notes",
-                      style: TextStyle(
-                          color: blueColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Spacer(),
-                    Switch(
-                        value: _npc.darkMode,
-                        onChanged: (val) {
-                          _npc.trigger(val);
-                        })
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: _npc.bg),
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: PDF(
-                  enableSwipe: true,
-                  swipeHorizontal: true,
-                  autoSpacing: false,
-                  pageFling: false,
-                  nightMode: _npc.darkMode,
-                  onError: (error) {
-                    print(error.toString());
-                  },
-                  onPageError: (page, error) {
-                    print('$page: ${error.toString()}');
-                  },
-                ).cachedFromUrl(
-                    'https://firebasestorage.googleapis.com/v0/b/stackx-24edc.appspot.com/o/1.VLSI%20DESIGN.pdf?alt=media&token=6b46c7d8-4f2e-4102-bd2b-14a05ceefffc'),
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+      ),
+      backgroundColor: _bg_color,
+      body: Column(
+        children: [
+          SizedBox(
+            height: getheight(context, 20),
           ),
-        ));
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 26)),
+            child: Row(
+              children: [
+                Text(
+                  "VLSI Notes",
+                  style: TextStyle(
+                      color: blueColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+                Spacer(),
+                Switch(
+                    value: _dark_mode,
+                    onChanged: (val) {
+                      setState(() {
+                        _dark_mode = val;
+                        var temp = _bg_color;
+                        _bg_color = _border_color;
+                        _border_color = temp;
+                      });
+                    })
+              ],
+            ),
+          ),
+          SizedBox(
+            height: getheight(context, 10),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: _border_color, width: 4)),
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: PDF(              
+              enableSwipe: true,
+              swipeHorizontal: true,
+              autoSpacing: false,
+              pageFling: false,
+              nightMode: _dark_mode,
+              onError: (error) {
+                print(error.toString());
+              },
+              onPageError: (page, error) {
+                print('$page: ${error.toString()}');
+              },
+            ).cachedFromUrl(
+                'https://firebasestorage.googleapis.com/v0/b/stackx-24edc.appspot.com/o/1.VLSI%20DESIGN.pdf?alt=media&token=6b46c7d8-4f2e-4102-bd2b-14a05ceefffc'),
+          ),
+        ],
+      ),
+    );
   }
 }

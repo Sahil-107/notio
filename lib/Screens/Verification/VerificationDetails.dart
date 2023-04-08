@@ -13,11 +13,15 @@ class _VerificationState extends State<Verification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: getheight(context, 60)),
+            SizedBox(height: getheight(context, 25)),
             Container(
               padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
               child: Row(

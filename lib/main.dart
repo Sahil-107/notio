@@ -11,6 +11,7 @@ import 'package:notio/Screens/Creator/CreatorMenu.dart';
 import 'package:notio/Screens/Creator/NewContribution.dart';
 import 'package:notio/Screens/Creator/Revenue.dart';
 import 'package:notio/Screens/Creator/newPost.dart';
+import 'package:notio/Screens/Notifications.dart';
 import 'package:notio/Screens/Verification/underVerificationPage.dart';
 import 'package:notio/Screens/Verification/verificationDetails.dart';
 import 'Screens/Auth/Login.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
           '/enterOtp': (context) => EnterOTP(),
           '/resetPassword1': (context) => ResetPassword1(),
           '/resetPassword2': (context) => ResetPassword2(),
+          '/notifications': (context) => Notifications(),
         },
         initialRoute: '/loading');
   }

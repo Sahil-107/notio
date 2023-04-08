@@ -17,10 +17,14 @@ class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: getheight(context, 65)),
+          SizedBox(height: getheight(context, 25)),
           Container(
             padding: EdgeInsets.symmetric(horizontal: getwidth(context, 23)),
             child: Column(
@@ -58,7 +62,7 @@ class _OnboardingState extends State<Onboarding> {
                   icon: const Icon(Icons.keyboard_arrow_down),
                   elevation: 16,
                   style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                      color: Colors.black, fontWeight: FontWeight.normal),
                   onChanged: (newValue) {
                     setState(() {
                       branch = newValue!;
@@ -77,11 +81,9 @@ class _OnboardingState extends State<Onboarding> {
                   color: Colors.grey,
                 ),
                 SizedBox(
-                  height: getheight(context, 13),
+                  height: getheight(context, 23),
                 ),
-                SizedBox(
-                  height: getheight(context, 10),
-                ),
+                
                 DropdownButtonFormField<String>(
                   menuMaxHeight: 260,
                   value: sem,
@@ -97,7 +99,7 @@ class _OnboardingState extends State<Onboarding> {
                   icon: const Icon(Icons.keyboard_arrow_down),
                   elevation: 16,
                   style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                      color: Colors.black, fontWeight: FontWeight.normal),
                   onChanged: (newValue) {
                     setState(() {
                       sem = newValue!;

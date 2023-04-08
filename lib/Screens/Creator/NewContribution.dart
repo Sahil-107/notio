@@ -10,9 +10,13 @@ class NewContribution extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       body: Column(
         children: [
-          SizedBox(height: getheight(context, 60)),
+          SizedBox(height: getheight(context, 30)),
           Container(
               margin: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
               child: Column(

@@ -10,4 +10,4 @@ double getwidth(context, value) {
 
 Color bg = const Color(0xfff9fbff);
 
-Color blueColor = const Color(0xFF376AED);
+Color blueColor = const Color(0xff0092f2);

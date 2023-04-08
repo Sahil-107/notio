@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -19,140 +17,132 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
-        backgroundColor: Colors.blue.withOpacity(0.2), // Status bar color
+        backgroundColor: Colors.blue, // Status bar color
       ),
       backgroundColor: bg,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: getheight(context, 20)),
-          Container(
-            height: getheight(context, 80),
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Hi, Rahul!"),
-                    SizedBox(height: getheight(context, 10)),
-                    Text(
-                      "Welcome back",
-                      style: TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.notifications)
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: getheight(context, 20)),
+            Container(
+              height: getheight(context, 80),
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hi, Rahul!"),
+                      SizedBox(height: getheight(context, 10)),
+                      Text(
+                        "Welcome back",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Icon(Icons.notifications)
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 25),
-          ),
-          Container(
-            height: getheight(context, 92),
-            margin: EdgeInsets.only(
-                left: getwidth(context, 10), right: getwidth(context, 10)),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                Semester(
-                  sem: 1.toString(),
-                ),
-                Semester(
-                  sem: 2.toString(),
-                ),
-                Semester(
-                  sem: 3.toString(),
-                ),
-                Semester(
-                  sem: 4.toString(),
-                ),
-                Semester(
-                  sem: 5.toString(),
-                ),
-                Semester(
-                  sem: 6.toString(),
-                ),
-                Semester(
-                  sem: 7.toString(),
-                ),
-                Semester(
-                  sem: 8.toString(),
-                ),
-              ],
+            // SizedBox(
+            //   height: getheight(context, 25),
+            // ),
+            Container(
+              height: getheight(context, 92),
+              margin: EdgeInsets.only(
+                  left: getwidth(context, 10), right: getwidth(context, 10)),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Semester(
+                    sem: 1.toString(),
+                  ),
+                  Semester(
+                    sem: 2.toString(),
+                  ),
+                  Semester(
+                    sem: 3.toString(),
+                  ),
+                  Semester(
+                    sem: 4.toString(),
+                  ),
+                  Semester(
+                    sem: 5.toString(),
+                  ),
+                  Semester(
+                    sem: 6.toString(),
+                  ),
+                  Semester(
+                    sem: 7.toString(),
+                  ),
+                  Semester(
+                    sem: 8.toString(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 22),
-          ),
-          CarouselSlider(
-            options: CarouselOptions(
-                clipBehavior: Clip.none,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-                viewportFraction: 0.7,
-                height: getheight(context, 260)),
-            items: [
-              {"imageName": "chip"},
-              {"imageName": "chip2"},
-              {"imageName": "chip"}
-            ].map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return noteWidget(
-                    imageName: item["imageName"]!,
-                  );
-                },
-              );
-            }).toList(),
-          ),
-          SizedBox(
-            height: getheight(context, 30),
-          ),
-          Center(
-            child: Text(
-              "Might be useful",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            SizedBox(
+              height: getheight(context, 22),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 17),
-          ),
-          Container(
-            // height: getheight(context, 200),
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Hi, Rahul!"),
-                    SizedBox(height: getheight(context, 10)),
-                    Text(
-                      "Welcome back",
-                      style: TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.notifications)
-              ],
+            CarouselSlider(
+              options: CarouselOptions(
+                  clipBehavior: Clip.none,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.7,
+                  height: getheight(context, 260)),
+              items: [{}, {}, {}].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return noteWidget();
+                  },
+                );
+              }).toList(),
             ),
-          )
-        ],
+            SizedBox(
+              height: getheight(context, 30),
+            ),
+            Center(
+              child: Text(
+                "Might be useful",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              ),
+            ),
+            SizedBox(
+              height: getheight(context, 17),
+            ),
+            Container(
+              // height: getheight(context, 200),
+              child: Column(
+                children: [
+                  Column(
+                    children: [
+                      ArticleWidget(),
+                      ArticleWidget(),
+                      ArticleWidget(),
+                      ArticleWidget(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: getheight(context, 85),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
 class noteWidget extends StatelessWidget {
-  noteWidget({required this.imageName});
-
-  String imageName;
-
+  const noteWidget({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -162,20 +152,19 @@ class noteWidget extends StatelessWidget {
         //     context, MaterialPageRoute(builder: (context) => NoteModule()));
       },
       child: Container(
-        width: getwidth(context, 233),
+        width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Color(0xff0d253c).withOpacity(0.44),
-                spreadRadius: 0,
-                blurRadius: 14,
-                offset: Offset(0, 12), // changes position of shadow
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 4), // changes position of shadow
               ),
             ],
             image: DecorationImage(
-                image: AssetImage('images/${imageName}.jpg'),
-                fit: BoxFit.cover),
+                image: AssetImage('images/chip2.jpg'), fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(28)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,7 +178,7 @@ class noteWidget extends StatelessWidget {
                 "VLSI Technology",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: FontWeight.w800),
               ),
             ),
@@ -204,20 +193,20 @@ class ArticleWidget extends StatelessWidget {
   const ArticleWidget({
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xffFFFFFF),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.black.withOpacity(0.03)),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            spreadRadius: 3,
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          ),
+          // BoxShadow(
+          //   color: Colors.black.withOpacity(0.10),
+          //   spreadRadius: 3,
+          //   blurRadius: 8,
+          //   offset: Offset(0, 4),
+          // ),
         ],
       ),
       height: getheight(context, 141),
@@ -235,17 +224,17 @@ class ArticleWidget extends StatelessWidget {
                     DecorationImage(image: AssetImage("images/articles.png"))),
           ),
           SizedBox(
-            width: getwidth(context, 25),
+            width: getwidth(context, 20),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "BIG DATA",
                 style: TextStyle(
                     color: Color(0xff376AED),
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w800),
               ),
               SizedBox(
@@ -264,9 +253,7 @@ class ArticleWidget extends StatelessWidget {
 
 class Semester extends StatelessWidget {
   Semester({required this.sem});
-
   String sem;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -288,7 +275,7 @@ class Semester extends StatelessWidget {
             child: Image(image: AssetImage("images/sem$sem.png")),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFF376AED), width: 3),
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(18),
               //image: DecorationImage(image: AssetImage("images/sem1.png")),
             ),
           ),

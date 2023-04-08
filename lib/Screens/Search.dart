@@ -17,16 +17,23 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          backgroundColor: Colors.blue, // Status bar color
+        ),
         backgroundColor: Colors.white.withOpacity(0.5),
         body: Column(
           children: [
             SizedBox(
-              height: getheight(context, 55),
+              height: getheight(context, 25),
             ),
             Container(
+              
               margin: EdgeInsets.symmetric(horizontal: getwidth(context, 25)),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50), color: Colors.white),
+                  border: Border.all(color: blueColor, width: 0.8),
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.white),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
@@ -39,9 +46,6 @@ class _SearchState extends State<Search> {
                           });
                         },
                         decoration: InputDecoration(
-                            // prefixIcon: Padding(
-                            //     padding: EdgeInsets.only(left: getwidth(context, 120)),
-                            //     child: Icon(Icons.search)),
                             border: InputBorder.none,
                             hintText: " Search",
                             hintStyle: TextStyle(

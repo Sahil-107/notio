@@ -21,104 +21,112 @@ class _SavedState extends State<Saved> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Color(0xfff9fbff),
-      body: Column(
-        children: [
-          SizedBox(height: getheight(context, 60)),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Saved",
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.notifications)
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: getheight(context, 20)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Saved Stuff",
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Icon(Icons.notifications)
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: getheight(context, 36),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  // textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      "Saved notes",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                    ),
-                    Spacer(),
-                    Text(
-                      "more",
-                      style: TextStyle(color: Colors.blue),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: getheight(context, 27),
-                ),
-                Container(
-                  height: getheight(context, 264),
-                  child: SingleChildScrollView(
-                    controller: _mycontroller1,
-                    child: Column(
-                      children: [
-                        Notes(
-                            isliked: _isliked_notes,
-                            isbookmarked: _isbookmarked_notes),
-                        Notes(
-                            isliked: _isliked_notes,
-                            isbookmarked: _isbookmarked_notes),
-                        Notes(
-                            isliked: _isliked_notes,
-                            isbookmarked: _isbookmarked_notes),
-                      ],
+            SizedBox(
+              height: getheight(context, 20),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    // textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        "Notes",
+                        style:
+                            TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                      ),
+                      Spacer(),
+                      Text(
+                        "more",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: getheight(context, 27),
+                  ),
+                  Container(
+                    height: getheight(context, 264),
+                    child: SingleChildScrollView(
+                      controller: _mycontroller1,
+                      child: Column(
+                        children: [
+                          Notes(
+                              isliked: _isliked_notes,
+                              isbookmarked: _isbookmarked_notes),
+                          Notes(
+                              isliked: _isliked_notes,
+                              isbookmarked: _isbookmarked_notes),
+                          Notes(
+                              isliked: _isliked_notes,
+                              isbookmarked: _isbookmarked_notes),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: getheight(context, 27),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  // textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(
-                      "Saved question papers",
-                      overflow: TextOverflow.visible,
-                      style: TextStyle(
-                          fontSize: getheight(context, 20),
-                          fontWeight: FontWeight.w900),
-                    ),
-                    Spacer(),
-                    Text(
-                      "more",
-                      style: TextStyle(color: Colors.blue),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: getheight(context, 14),
-                ),
-                Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
-                Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
-              ],
+                  SizedBox(
+                    height: getheight(context, 27),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    // textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        "Question papers",
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                            fontSize: getheight(context, 20),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Spacer(),
+                      Text(
+                        "more",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: getheight(context, 14),
+                  ),
+                  Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
+                  Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
+                  Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
+                  Quepaper(isbookmarked_quepapers: _isbookmarked_quepapers),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

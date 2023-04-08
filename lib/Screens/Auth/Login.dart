@@ -31,6 +31,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: blueColor, // Status bar color
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(children: [
@@ -38,7 +42,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
           Center(
             child: Image(
               image: AssetImage("images/logo.png"),
-              height: getheight(context, 172),
+              height: getheight(context, 162),
               width: getheight(context, 172),
             ),
           ),

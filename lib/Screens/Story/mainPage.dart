@@ -26,14 +26,20 @@ class _storyViewState extends State<storyView> {
 
   Future<void> get_data() async {
     var res = await http.post(
-        Uri.parse("http://192.168.1.4:8080/userStory/getStories"),
+        Uri.parse("http://192.168.1.7:8080/userStory/getStories"),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        body: jsonEncode({"id": "237642"}));
-    print(jsonDecode(res.body)["Stories"][0]["image"]);
+        body: jsonEncode({
+          "id": 237642,
+          "sem": 7,
+          "college": "UIT",
+          "university": "HPU",
+          "branch": "CSE"
+        }));
+    print(jsonDecode(res.body)["Stories"][0]["name"]);
     setState(() {
-      jj = jsonDecode(res.body)["Stories"][0]["image"];
+      jj = jsonDecode(res.body)["Stories"][0]["name"];
     });
   }
 

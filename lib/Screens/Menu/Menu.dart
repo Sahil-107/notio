@@ -1,36 +1,33 @@
-// import 'dart:js';
 import 'package:flutter/material.dart';
 import '../../utility.dart';
 
 class Menu extends StatelessWidget {
   const Menu({Key? key}) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white.withOpacity(0.4),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: getheight(context, 60)),
+             SizedBox(height: getheight(context, 20)),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
               child: Row(
                 children: [
-                  SizedBox(
-                    width: getwidth(context, 20),
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Menu",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w700),
-                      ),
-                      // SizedBox(height: getheight(context, 10)),
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                      )
                     ],
                   ),
                   Spacer(),
@@ -39,8 +36,8 @@ class Menu extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: getheight(context, 30),
-            ),
+              height: getheight(context, 20),
+            ),            
             Container(
                 margin: EdgeInsets.symmetric(horizontal: getwidth(context, 24)),
                 decoration: BoxDecoration(
@@ -128,14 +125,9 @@ class Menu extends StatelessWidget {
             SizedBox(
               height: getheight(context, 18),
             ),
-            Image(
-                image: AssetImage("images/logout.png"),
-                height: getheight(context, 65),
-                width: getheight(context, 65)),
-            // info_containers(context, "Logout", () {}),
-            SizedBox(
-              height: getheight(context, 110),
-            )
+           
+            info_containers(context, "Logout", () {}),
+            
           ],
         ),
       ),

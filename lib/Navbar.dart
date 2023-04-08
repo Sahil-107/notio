@@ -1,6 +1,7 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notio/Screens/Home.dart';
 import 'package:notio/Screens/Saved.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
@@ -33,7 +34,80 @@ class _NavbarState extends State<Navbar> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, '/newContribution');
+          // Navigator.pushNamed(context, '/newContribution');
+          showModalBottomSheet<void>(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (BuildContext context) {
+              return Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(400),
+                        topRight: Radius.circular(400))),
+                height: getheight(context, 180),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_box,
+                            size: 25,
+                            color: blueColor,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Add Story",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: getheight(context, 25),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_chart,
+                            size: 25,
+                            color: blueColor,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Add Notes",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: getheight(context, 20),
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            navigator!.pop();
+                          },
+                          child: Icon(Icons.cancel_outlined))
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         },
       ),
       bottomNavigationBar: BottomAppBar(
