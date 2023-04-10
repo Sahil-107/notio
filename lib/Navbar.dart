@@ -55,7 +55,7 @@ class _NavbarState extends State<Navbar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.add_box,
+                            Icons.add_circle_rounded,
                             size: 25,
                             color: blueColor,
                           ),
@@ -78,7 +78,7 @@ class _NavbarState extends State<Navbar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.add_chart,
+                            Icons.add_box,
                             size: 25,
                             color: blueColor,
                           ),

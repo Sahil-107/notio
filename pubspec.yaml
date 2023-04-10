@@ -47,6 +47,7 @@ dependencies:
   http: ^0.13.5
   flutter_switch: ^0.3.2
   flutter_advanced_switch: ^3.0.1
+  percent_indicator: ^4.2.3
 
 
 dev_dependencies:
