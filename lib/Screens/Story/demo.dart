@@ -20,7 +20,7 @@ class _demoState extends State<demo> {
   bool _visible = true;
   int _time = 10;
   late Timer _timer;
-  double _percent = 1.0;
+  double _per = 1.0;
 
   @override
   void initState() {
@@ -28,10 +28,8 @@ class _demoState extends State<demo> {
       if (currentIndex < widget.stories.length - 1) {
         setState(() {
           currentIndex++;
-          _percent = _percent==1.0?_percent=0.0:_percent=1.0;
         });
       } else {
-        timer.cancel();
         Navigator.pop(context);
       }
     });
@@ -134,7 +132,9 @@ class _demoState extends State<demo> {
                         setState(() {
                           if (currentIndex != 0) {
                             currentIndex--;
-                            _percent = _percent==1.0?_percent=0.0:_percent=1.0;
+                          }
+                          else{
+                            Navigator.pop(context);
                           }
                         });
                       },
@@ -153,7 +153,8 @@ class _demoState extends State<demo> {
                         setState(() {
                           if (currentIndex < widget.stories.length - 1) {
                             currentIndex++;
-                            _percent = _percent==1.0?_percent=0.0:_percent=1.0;
+                          } else {
+                            Navigator.pop(context);
                           }
                         });
                       },
@@ -174,7 +175,6 @@ class _demoState extends State<demo> {
                         widget.stories.length,
                         (index) => Visibility(
                           visible: _visible,
-
                           child: LinearPercentIndicator(
                             backgroundColor: Colors.grey,
                             width: MediaQuery.of(context).size.width /
@@ -183,8 +183,9 @@ class _demoState extends State<demo> {
                             animation: true,
                             lineHeight: 5.0,
                             animationDuration: _time * 1000,
-                            percent: _percent,
+                            percent: _per,
                             padding: EdgeInsets.only(right: 5),
+                            restartAnimation: true,
                             barRadius: Radius.circular(20),
                             animateFromLastPercent: true,
                             progressColor:

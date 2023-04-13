@@ -10,14 +10,16 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   String branch = "Select Branch";
   String sem = "Select Semester";
+  String gender = "Select Gender";
 
   List<String> branchlist = ["Select Branch", "ECE", "IT", "CSE"];
   List<String> semlist = ["Select Semester", "1", "2", "3"];
+  List<String> genders = ["Select Gender", "Male", "Female"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: Colors.blue, // Status bar color
       ),
@@ -42,80 +44,118 @@ class _OnboardingState extends State<Onboarding> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 SizedBox(
-                  height: getheight(context, 30),
+                  height: getheight(context, 40),
                 ),
-                SizedBox(
-                  height: getheight(context, 10),
-                ),
-                DropdownButtonFormField<String>(
-                  menuMaxHeight: 260,
-                  value: branch,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none),
-                      // filled: true,
-                      fillColor: Colors.white),
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  elevation: 16,
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.normal),
-                  onChanged: (newValue) {
-                    setState(() {
-                      branch = newValue!;
-                    });
-                  },
-                  items: branchlist.map<DropdownMenuItem<String>>((value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                Divider(
-                  thickness: 2,
-                  // color: blueColor,
-                  color: Colors.grey,
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: branch,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (newValue) {
+                      setState(() {
+                        branch = newValue!;
+                      });
+                    },
+                    items: branchlist.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(
                   height: getheight(context, 23),
                 ),
-                
-                DropdownButtonFormField<String>(
-                  menuMaxHeight: 260,
-                  value: sem,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide.none),
-                      // filled: true,
-                      fillColor: Colors.white),
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  elevation: 16,
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.normal),
-                  onChanged: (newValue) {
-                    setState(() {
-                      sem = newValue!;
-                    });
-                  },
-                  items: semlist.map<DropdownMenuItem<String>>((value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                Container(
+                   decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: sem,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (newValue) {
+                      setState(() {
+                        sem = newValue!;
+                      });
+                    },
+                    items: semlist.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                Divider(
-                  thickness: 2,
-                  // color: blueColor,
-                  color: Colors.grey,
+                SizedBox(
+                  height: getheight(context, 23),
+                ),
+                Container(
+                   decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: gender,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (newValue) {
+                      setState(() {
+                        gender = newValue!;
+                      });
+                    },
+                    items: genders.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(
                   height: getheight(context, 45),
@@ -128,14 +168,14 @@ class _OnboardingState extends State<Onboarding> {
                     height: getheight(context, 60),
                     width: getwidth(context, 215),
                     decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.black.withOpacity(0.25),
-                        //     spreadRadius: 3,
-                        //     blurRadius: 8,
-                        //     offset: Offset(0, 4),
-                        //   ),
-                        // ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.25),
+                            spreadRadius: 1,
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(12),
                         color: blueColor),
                     child: const Center(

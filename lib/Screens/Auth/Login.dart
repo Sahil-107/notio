@@ -18,20 +18,22 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   String _username = "";
   String _name = "";
   String _phone = "";
-  List<String> collegelist = ["HPU", "HPTU", "CU"];
-  String dropdownValue = "Select University";
+  List<String> _universities = ["Select University", "HPU", "HPTU", "CU"];
+  List<String> _colleges = ["Select College", "UIT", "CU", "HPTU"];
+  String _universityDropdownValue = "Select University";
+  String _collegeDropdownValue = "Select College";
 
   @override
   void initState() {
     super.initState();
-    collegelist = ["Select University", "HPU", "HPTU", "CU"];
+
     _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: blueColor, // Status bar color
       ),
@@ -377,42 +379,78 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 SizedBox(
                                   height: getheight(context, 10),
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                          color: Colors.grey, width: 1.0),
-                                    ),
-                                  ),
-                                  child: DropdownButton<String>(
-                                    menuMaxHeight: 260,
-                                    isExpanded: true,
-                                    value: dropdownValue,
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    elevation: 16,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                    underline: Container(
-                                      color: Colors.black,
-                                    ),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        dropdownValue = newValue!;
-                                      });
-                                    },
-                                    items: collegelist
-                                        .map<DropdownMenuItem<String>>((value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: getheight(context, 10),
-                                ),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //     border: Border(
+                                //       bottom: BorderSide(
+                                //           color: Colors.grey, width: 1.0),
+                                //     ),
+                                //   ),
+                                //   child: DropdownButton<String>(
+                                //     menuMaxHeight: 260,
+                                //     isExpanded: true,
+                                //     value: _universityDropdownValue,
+                                //     icon: const Icon(Icons.keyboard_arrow_down),
+                                //     elevation: 16,
+                                //     style: const TextStyle(
+                                //         color: Colors.black,
+                                //         fontWeight: FontWeight.bold),
+                                //     underline: Container(
+                                //       color: Colors.black,
+                                //     ),
+                                //     onChanged: (newValue) {
+                                //       setState(() {
+                                //         _universityDropdownValue = newValue!;
+                                //       });
+                                //     },
+                                //     items: _universities
+                                //         .map<DropdownMenuItem<String>>((value) {
+                                //       return DropdownMenuItem<String>(
+                                //         value: value,
+                                //         child: Text(value),
+                                //       );
+                                //     }).toList(),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: getheight(context, 10),
+                                // ),
+                                // Container(
+                                //   decoration: BoxDecoration(
+                                //     border: Border(
+                                //       bottom: BorderSide(
+                                //           color: Colors.grey, width: 1.0),
+                                //     ),
+                                //   ),
+                                //   child: DropdownButton<String>(
+                                //     menuMaxHeight: 260,
+                                //     isExpanded: true,
+                                //     value: _collegeDropdownValue,
+                                //     icon: const Icon(Icons.keyboard_arrow_down),
+                                //     elevation: 16,
+                                //     style: const TextStyle(
+                                //         color: Colors.black,
+                                //         fontWeight: FontWeight.bold),
+                                //     underline: Container(
+                                //       color: Colors.black,
+                                //     ),
+                                //     onChanged: (newValue) {
+                                //       setState(() {
+                                //         _collegeDropdownValue = newValue!;
+                                //       });
+                                //     },
+                                //     items: _colleges
+                                //         .map<DropdownMenuItem<String>>((value) {
+                                //       return DropdownMenuItem<String>(
+                                //         value: value,
+                                //         child: Text(value),
+                                //       );
+                                //     }).toList(),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: getheight(context, 10),
+                                // ),
                                 TextField(
                                   onChanged: (value) {
                                     setState(() {
@@ -511,7 +549,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: getheight(context, 20),
+                                  height: getheight(context, 50),
                                 ),
                               ],
                             ),

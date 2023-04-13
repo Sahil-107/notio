@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
+import 'package:notio/Screens/Blogs/blog.dart';
 import 'package:notio/Screens/NoteModule/noteModule.dart';
 import 'package:notio/Screens/Story/demo.dart';
 import 'package:notio/Screens/Story/mainStoryPage.dart';
@@ -206,57 +207,65 @@ class ArticleWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xffFFFFFF),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.black.withOpacity(0.03)),
-        boxShadow: [
-          // BoxShadow(
-          //   color: Colors.black.withOpacity(0.10),
-          //   spreadRadius: 3,
-          //   blurRadius: 8,
-          //   offset: Offset(0, 4),
-          // ),
-        ],
-      ),
-      height: getheight(context, 141),
-      margin: EdgeInsets.only(
-          left: getwidth(context, 25),
-          right: getwidth(context, 25),
-          bottom: getheight(context, 15)),
-      child: Row(
-        children: [
-          Container(
-            width: getwidth(context, 92),
-            // height: getheight(context, 121),
-            decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: AssetImage("images/articles.png"))),
-          ),
-          SizedBox(
-            width: getwidth(context, 20),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "BIG DATA",
-                style: TextStyle(
-                    color: Color(0xff376AED),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800),
-              ),
-              SizedBox(
-                height: getwidth(context, 4),
-              ),
-              Container(
-                  width: getwidth(context, 160),
-                  child: Text("Why big data needs thick data ?"))
-            ],
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BlogPostScreen()),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color(0xffFFFFFF),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.black.withOpacity(0.03)),
+          boxShadow: [
+            // BoxShadow(
+            //   color: Colors.black.withOpacity(0.10),
+            //   spreadRadius: 3,
+            //   blurRadius: 8,
+            //   offset: Offset(0, 4),
+            // ),
+          ],
+        ),
+        height: getheight(context, 141),
+        margin: EdgeInsets.only(
+            left: getwidth(context, 25),
+            right: getwidth(context, 25),
+            bottom: getheight(context, 15)),
+        child: Row(
+          children: [
+            Container(
+              width: getwidth(context, 92),
+              // height: getheight(context, 121),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/articles.png"))),
+            ),
+            SizedBox(
+              width: getwidth(context, 20),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "BIG DATA",
+                  style: TextStyle(
+                      color: Color(0xff376AED),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  height: getwidth(context, 4),
+                ),
+                Container(
+                    width: getwidth(context, 160),
+                    child: Text("Why big data needs thick data ?"))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -281,9 +290,16 @@ class _SemesterState extends State<Semester> {
 
   List<StoryItem> _stories = [];
   List<storyObject> _storyData = [];
+
   _getStrories(sem) async {
     storyServices storyService = new storyServices();
-    var res = await storyService.getStroiesapi(sem);
+    var res = await storyService.getStroiesapi({
+      "id": 237642,
+      "sem": sem,
+      "college": "UIT",
+      "university": "HPU",
+      "branch": "CSE"
+    });
     for (var element in jsonDecode(res.body)["Stories"]) {
       Rx<String> _image = element["image"].toString().obs;
       _stories.add(StoryItem.pageProviderImage(
@@ -296,18 +312,16 @@ class _SemesterState extends State<Semester> {
 
       _storyData.add(
         storyObject(
-          storyItem: MemoryImage(
-            base64Decode(_image.value),
-          ),
-          poster: element["name"],
-          views: element["views"],
-          bolts: 10,
-          story_id: element["storiy_id"],
-          branch: element["branch"]
-        ),
+            storyItem: MemoryImage(
+              base64Decode(_image.value),
+            ),
+            poster: element["name"],
+            views: element["views"],
+            bolts: 10,
+            story_id: element["storiy_id"],
+            branch: element["branch"]),
       );
     }
-
     setState(() {});
   }
 
