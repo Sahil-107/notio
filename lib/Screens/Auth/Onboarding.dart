@@ -14,7 +14,12 @@ class _OnboardingState extends State<Onboarding> {
 
   List<String> branchlist = ["Select Branch", "ECE", "IT", "CSE"];
   List<String> semlist = ["Select Semester", "1", "2", "3"];
-  List<String> genders = ["Select Gender", "Male", "Female"];
+  List<String> genders = ["Select Gender", "Male", "Female", "Chkke!"];
+
+  List<String> _universities = ["Select University", "HPU", "HPTU", "CU"];
+  List<String> _colleges = ["Select College", "UIT", "CU", "HPTU"];
+  String _universityDropdownValue = "Select University";
+  String _collegeDropdownValue = "Select College";
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,84 @@ class _OnboardingState extends State<Onboarding> {
                 SizedBox(
                   height: getheight(context, 40),
                 ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: _universityDropdownValue,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (newValue) {
+                      setState(() {
+                      _universityDropdownValue = newValue!;
+                      });
+                    },
+                    items: _universities.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: getheight(context, 23),
+                ),
+
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    menuMaxHeight: 260,
+                    value: _collegeDropdownValue,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none),
+                        // filled: true,
+                        fillColor: Colors.white),
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    elevation: 16,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (newValue) {
+                      setState(() {
+                        _collegeDropdownValue = newValue!;
+                      });
+                    },
+                    items: _colleges.map<DropdownMenuItem<String>>((value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: getheight(context, 23),
+                ),
+                
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
