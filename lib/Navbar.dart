@@ -10,6 +10,7 @@ import 'package:notio/Screens/Search1.dart';
 import 'package:notio/utility.dart';
 
 import 'Screens/Menu/Menu.dart';
+import 'Screens/Story/uploadStory.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class Navbar extends StatefulWidget {
 
 class _NavbarState extends State<Navbar> {
   int _index = 0;
-
   @override
   Widget build(BuildContext context) {
     List<Widget> screens = [Home(), Saved(), Search(), Menu()];
@@ -62,12 +62,18 @@ class _NavbarState extends State<Navbar> {
                           SizedBox(
                             width: 20,
                           ),
-                          Text(
-                            "Add Story",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.pushNamed(context, '/uploadStory');
+                              UploadStory(context);
+                            },
+                            child: Text(
+                              "Add Story",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18),
+                            ),
                           )
                         ],
                       ),
