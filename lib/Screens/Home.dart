@@ -59,9 +59,6 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: getheight(context, 25),
-            // ),
             Container(
               height: getheight(context, 92),
               margin: EdgeInsets.only(
