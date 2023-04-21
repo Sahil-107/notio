@@ -1,7 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:notio/Objects/curUser.dart';
+import 'package:notio/apiServices/authServices.dart';
+import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -18,13 +26,72 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   String _username = "";
   String _name = "";
   String _phone = "";
-  
+  String _login_username = "";
+  String _login_password = "";
+
+  authServices _authservices = new authServices();
 
   @override
   void initState() {
     super.initState();
-
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  loginUser() async {
+    var _token = await _authservices.generateToken("notio_cc");
+    var userObject = {
+      "userName": _login_username,
+      "password": _login_password,
+      "token": _token.body,
+    };
+    var res = await _authservices.loginUser(userObject);
+
+    loadUser(jsonDecode(res.body)["Data"]["id"]);
+  }
+
+  loadUser(int uid) async {
+    await prefs.setInt("UID", uid);
+    var _token = await _authservices.generateToken("notio_cc");
+    var _data =
+        await _authservices.getUserData({"token": _token.body, "id": uid});
+    print(jsonDecode(_data.body)["Response"]);
+    await putData(jsonDecode(_data.body)["Response"]);
+    Navigator.pushReplacementNamed(context, '/navbar');
+  }
+
+  putData(_data) {
+    currentUser.setemail(_data["email"]);
+    currentUser.setphone(_data["phone"].toString());
+    currentUser.setusername(_data["username"]);
+    currentUser.setname(_data["name"]);
+    currentUser.setuid(_data["id"]);
+    currentUser.setbranch(_data["branch"]);
+    currentUser.setuniversity(_data["university"]);
+    currentUser.setcollege(_data["college"]);
+    currentUser.setgender(_data["gender"]);
+    currentUser.setsem(_data["sem"]);
+  }
+
+  registerUser() async {
+    var _token = await _authservices.generateToken("notio_cc");
+    var userObject = {
+      "email": _email,
+      "token": _token.body,
+      "phone": _phone,
+      "password": _pass,
+      "username": _username
+    };
+    var res = await _authservices.registerUser(userObject);
+
+    setCurUser(int.parse(jsonDecode(res.body)["uid"]));
+  }
+
+  setCurUser(int id) {
+    currentUser.setemail(_email);
+    currentUser.setphone(_phone);
+    currentUser.setusername(_username);
+    currentUser.setname(_name);
+    currentUser.setuid(id);
   }
 
   @override
@@ -74,13 +141,13 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   tabs: const [
                     Text(
                       "Login",
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "Sign-up",
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ]),
               SizedBox(height: getheight(context, 24)),
@@ -118,8 +185,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               child: Text(
                                 "Welcome back",
                                 style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                             ),
                             SizedBox(
@@ -136,7 +202,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             TextField(
                               onChanged: (value) {
                                 setState(() {
-                                  _email = value.replaceAll(" ", "");
+                                  _login_username = value.replaceAll(" ", "");
                                 });
                               },
                               style: TextStyle(
@@ -150,7 +216,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   // border: InputBorder.none,
-                                  hintText: "Enter Email",
+                                  hintText: "Enter Email/Phone No.",
                                   hintStyle: TextStyle(
                                       fontSize: 16,
                                       color: Colors.grey.withOpacity(0.5))),
@@ -168,17 +234,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 cursorColor: Colors.black,
                                 onChanged: (value) {
                                   setState(() {
-                                    _pass = value;
+                                    _login_password = value;
                                   });
                                 },
                                 obscureText: _isObscure,
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 20),
+                                      padding: const EdgeInsets.only(right: 20),
                                       child: Icon(
                                         Icons.key_outlined,
                                         color: Colors.grey,
@@ -200,8 +264,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     hintText: "Enter Password",
                                     hintStyle: TextStyle(
                                         fontSize: 16,
-                                        color:
-                                            Colors.grey.withOpacity(0.5)))),
+                                        color: Colors.grey.withOpacity(0.5)))),
                             // Divider(
                             //   thickness: 2,
                             //   color: blueColor,
@@ -209,7 +272,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             SizedBox(height: getheight(context, 30)),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/onboarding');
+                                loginUser();
+                                // Navigator.pushNamed(context, '/onboarding');
                               },
                               child: Container(
                                 height: getheight(context, 60),
@@ -293,12 +357,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   });
                                 },
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 20),
+                                      padding: const EdgeInsets.only(right: 20),
                                       child: Icon(
                                         Icons.person_outlined,
                                         color: Colors.grey,
@@ -319,12 +381,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   });
                                 },
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 20),
+                                      padding: const EdgeInsets.only(right: 20),
                                       child: Icon(
                                         Icons.person_outline,
                                         color: Colors.grey,
@@ -376,7 +436,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               SizedBox(
                                 height: getheight(context, 10),
                               ),
-                              
                               TextField(
                                 onChanged: (value) {
                                   setState(() {
@@ -384,12 +443,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   });
                                 },
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 20),
+                                      padding: const EdgeInsets.only(right: 20),
                                       child: Icon(
                                         Icons.email_outlined,
                                         color: Colors.grey,
@@ -412,8 +469,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 },
                                 obscureText: _isObscure,
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: const EdgeInsets.only(right: 20),
@@ -445,22 +501,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 height: getheight(context, 25),
                               ),
                               GestureDetector(
-                                onTap: () {
+                                onTap: () async {
+                                  await registerUser();
                                   Navigator.pushNamed(context, '/onboarding');
                                 },
                                 child: Container(
                                   height: getheight(context, 60),
                                   width: getwidth(context, 295),
                                   decoration: BoxDecoration(
-                                      // boxShadow: [
-                                      //   BoxShadow(
-                                      //     color:
-                                      //         Colors.black.withOpacity(0.25),
-                                      //     spreadRadius: 3,
-                                      //     blurRadius: 8,
-                                      //     offset: Offset(0, 4),
-                                      //   ),
-                                      // ],
                                       borderRadius: BorderRadius.circular(12),
                                       color: blueColor),
                                   child: const Center(
@@ -475,7 +523,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 ),
                               ),
                               SizedBox(
-                                height: getheight(context, 50),
+                                height: getheight(context, 20),
                               ),
                             ],
                           ),

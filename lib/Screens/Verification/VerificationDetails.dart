@@ -222,7 +222,7 @@ class _VerificationState extends State<Verification> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/verification2');
+                      Navigator.pushNamed(context, '/creatorProfile');
                     },
                     child: Container(
                       height: getheight(context, 42),

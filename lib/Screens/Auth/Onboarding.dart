@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:notio/Objects/curUser.dart';
+import 'package:notio/apiServices/authServices.dart';
+import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 
 class Onboarding extends StatefulWidget {
@@ -21,6 +26,34 @@ class _OnboardingState extends State<Onboarding> {
   String _universityDropdownValue = "Select University";
   String _collegeDropdownValue = "Select College";
 
+  authServices authservices = new authServices();
+
+  Future<void> onboard() async {
+    var user = {
+      "id": currentUser.id,
+      "name": currentUser.name,
+      "branch": branch,
+      "university": _universityDropdownValue,
+      "college": _collegeDropdownValue,
+      "gender": gender,
+      "sem": int.parse(sem),
+      "isVerified": currentUser.isverified,
+      "isCreator": currentUser.iscreator,
+    };
+    var res = await authservices.onBoardUser(user);
+    print(jsonDecode(res.body));
+    setCurUser();
+  }
+
+  setCurUser() {
+    currentUser.setbranch(branch);
+    currentUser.setuniversity(_universityDropdownValue);
+    currentUser.setcollege(_collegeDropdownValue);
+    currentUser.setgender(gender);
+    currentUser.setsem(int.parse(sem));
+    prefs.setInt("UID", currentUser.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +71,7 @@ class _OnboardingState extends State<Onboarding> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hi, Rahul!",
+                  "Hi, ${currentUser.name}!",
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(
@@ -75,7 +108,7 @@ class _OnboardingState extends State<Onboarding> {
                         color: Colors.black, fontWeight: FontWeight.normal),
                     onChanged: (newValue) {
                       setState(() {
-                      _universityDropdownValue = newValue!;
+                        _universityDropdownValue = newValue!;
                       });
                     },
                     items: _universities.map<DropdownMenuItem<String>>((value) {
@@ -89,7 +122,6 @@ class _OnboardingState extends State<Onboarding> {
                 SizedBox(
                   height: getheight(context, 23),
                 ),
-
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -128,7 +160,6 @@ class _OnboardingState extends State<Onboarding> {
                 SizedBox(
                   height: getheight(context, 23),
                 ),
-                
                 Container(
                   decoration: BoxDecoration(
                     border: Border(
@@ -168,7 +199,7 @@ class _OnboardingState extends State<Onboarding> {
                   height: getheight(context, 23),
                 ),
                 Container(
-                   decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(color: Colors.grey, width: 1.0),
                     ),
@@ -206,7 +237,7 @@ class _OnboardingState extends State<Onboarding> {
                   height: getheight(context, 23),
                 ),
                 Container(
-                   decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(color: Colors.grey, width: 1.0),
                     ),
@@ -245,6 +276,7 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 InkWell(
                   onTap: () {
+                    onboard();
                     Navigator.pushNamed(context, '/navbar');
                   },
                   child: Container(

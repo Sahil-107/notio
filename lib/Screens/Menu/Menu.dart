@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notio/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../utility.dart';
 
 class Menu extends StatelessWidget {
@@ -13,122 +15,151 @@ class Menu extends StatelessWidget {
       ),
       backgroundColor: Colors.white.withOpacity(0.4),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-             SizedBox(height: getheight(context, 20)),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: getheight(context, 20)),
+              Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Menu",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w800),
+                        )
+                      ],
+                    ),
+                    Spacer(),
+                    Icon(Icons.notifications)
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: getheight(context, 20),
+              ),
+              Container(
+                  margin:
+                      EdgeInsets.symmetric(horizontal: getwidth(context, 24)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white),
+                  child: Column(
                     children: [
-                      Text(
-                        "Menu",
-                        style:
-                            TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+                      SizedBox(
+                        height: getheight(context, 26),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: getwidth(context, 10),
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                            
+                              prefs.clear();
+
+                            },
+                            child: Image(
+                              image: AssetImage("images/person.png"),
+                              height: getheight(context, 117),
+                              width: getwidth(context, 87),
+                            ),
+                          ),
+                          SizedBox(
+                            width: getwidth(context, 10),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(currentUser.name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  )),
+                              SizedBox(
+                                height: getheight(context, 10),
+                              ),
+                              Text(currentUser.email),
+                              SizedBox(
+                                height: getheight(context, 10),
+                              ),
+                              Text("+91 ${currentUser.phone}"),
+                              SizedBox(
+                                height: getheight(context, 10),
+                              ),
+                              Container(
+                                width: getwidth(context, 160),
+                                child: Text(currentUser.college +
+                                    ", " +
+                                    currentUser.university),
+                              ),
+                              SizedBox(
+                                height: getheight(context, 30),
+                              )
+                            ],
+                          ),
+                          Spacer(),
+                          Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.blue, fontSize: 14),
+                          ),
+                          SizedBox(
+                            width: getwidth(context, 20),
+                          )
+                        ],
                       )
                     ],
-                  ),
-                  Spacer(),
-                  Icon(Icons.notifications)
-                ],
+                  )),
+              SizedBox(
+                height: getheight(context, 27),
               ),
-            ),
-            SizedBox(
-              height: getheight(context, 20),
-            ),            
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: getwidth(context, 24)),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white),
+              info_containers(context, "Purchases", () {}),
+              SizedBox(
+                height: getheight(context, 18),
+              ),
+              info_containers(context, "Creator's Space", () {
+                Navigator.pushNamed(context, '/verificationDetails');
+              }),
+
+              Visibility(
+                visible: currentUser.iscreator,
                 child: Column(
                   children: [
                     SizedBox(
-                      height: getheight(context, 26),
+                      height: getheight(context, 18),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: getwidth(context, 10),
-                        ),
-                        Image(
-                          image: AssetImage("images/person.png"),
-                          height: getheight(context, 117),
-                          width: getwidth(context, 87),
-                        ),
-                        SizedBox(
-                          width: getwidth(context, 10),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Modi ji",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                )),
-                            SizedBox(
-                              height: getheight(context, 10),
-                            ),
-                            Text("modi@gmail.com"),
-                            SizedBox(
-                              height: getheight(context, 10),
-                            ),
-                            Text("+92 188274734"),
-                            SizedBox(
-                              height: getheight(context, 10),
-                            ),
-                            Container(
-                              width: getwidth(context, 160),
-                              child: Text("University Institute of Technology"),
-                            ),
-                            SizedBox(
-                              height: getheight(context, 30),
-                            )
-                          ],
-                        ),
-                        Spacer(),
-                        Text(
-                          "Edit",
-                          style: TextStyle(color: Colors.blue, fontSize: 14),
-                        ),
-                        SizedBox(
-                          width: getwidth(context, 20),
-                        )
-                      ],
-                    )
+                    info_containers(context, "Revenue", () {
+                      Navigator.pushNamed(context, '/revenue');
+                    }),
                   ],
-                )),
-            SizedBox(
-              height: getheight(context, 27),
-            ),
-            info_containers(context, "Purchases", () {}),
-            SizedBox(
-              height: getheight(context, 18),
-            ),
-            info_containers(context, "Creator Verification", () {
-              Navigator.pushNamed(context, '/verificationDetails');
-            }),
-            SizedBox(
-              height: getheight(context, 18),
-            ),
-            info_containers(context, "FAQ", () {}),
-            SizedBox(
-              height: getheight(context, 18),
-            ),
-            info_containers(context, "Terms and conditions", () {
-              Navigator.pushNamed(context, '/otp');
-            }),
-            SizedBox(
-              height: getheight(context, 18),
-            ),
-           
-            info_containers(context, "Logout", () {}),
-            
-          ],
+                ),
+              ),
+              SizedBox(
+                height: getheight(context, 18),
+              ),
+              info_containers(context, "FAQ", () {}),
+              SizedBox(
+                height: getheight(context, 18),
+              ),
+              info_containers(context, "Terms and conditions", () {
+                Navigator.pushNamed(context, '/otp');
+              }),
+              SizedBox(
+                height: getheight(context, 18),
+              ),
+
+              // info_containers(context, "Logout", () {}),
+              // SizedBox(
+              //   height: getheight(context, 60),
+              // ),
+            ],
+          ),
         ),
       ),
     );

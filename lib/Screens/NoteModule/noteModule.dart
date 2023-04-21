@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import 'package:notio/utility.dart';
 
 class NoteModule extends StatefulWidget {
@@ -82,7 +77,7 @@ class _NoteModuleState extends State<NoteModule> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: _border_color, width: 4)),
             height: MediaQuery.of(context).size.height * 0.8,
-            child: PDF(              
+            child: PDF(
               enableSwipe: true,
               swipeHorizontal: true,
               autoSpacing: false,
@@ -95,7 +90,7 @@ class _NoteModuleState extends State<NoteModule> {
                 print('$page: ${error.toString()}');
               },
             ).cachedFromUrl(
-                'https://firebasestorage.googleapis.com/v0/b/stackx-24edc.appspot.com/o/1.VLSI%20DESIGN.pdf?alt=media&token=6b46c7d8-4f2e-4102-bd2b-14a05ceefffc'),
+                'https://notio-notes.s3.ap-south-1.amazonaws.com/TCS.pdf-979562'),
           ),
         ],
       ),

@@ -10,7 +10,8 @@ import 'package:notio/Screens/NoteModule/noteModule.dart';
 import 'package:notio/Screens/Story/demo.dart';
 import 'package:notio/Screens/Story/mainStoryPage.dart';
 import 'package:notio/Screens/Story/storyObject.dart';
-import 'package:notio/Services/storyModuleServices.dart';
+import 'package:notio/apiServices/storyModuleServices.dart';
+import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Hi, Rahul!"),
+                      Text("Hi, ${currentUser.name} !"),
                       SizedBox(height: getheight(context, 10)),
                       Text(
                         "Welcome back",
@@ -291,11 +292,11 @@ class _SemesterState extends State<Semester> {
   _getStrories(sem) async {
     storyServices storyService = new storyServices();
     var res = await storyService.getStroiesapi({
-      "id": 237642,
+      "id": currentUser.id,
       "sem": sem,
-      "college": "UIT",
-      "university": "HPU",
-      "branch": "CSE"
+      "college": currentUser.college,
+      "university": currentUser.university,
+      "branch": currentUser.branch
     });
     for (var element in jsonDecode(res.body)["Stories"]) {
       Rx<String> _image = element["image"].toString().obs;
@@ -328,13 +329,7 @@ class _SemesterState extends State<Semester> {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await _stories).isNotEmpty) {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => storyView(_stories, _storyData),
-              //   ),
-              // );
+            if ((await _stories).isNotEmpty) {             
               Navigator.push(
                 context,
                 MaterialPageRoute(

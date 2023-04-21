@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notio/main.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../utility.dart';
 
@@ -14,6 +15,10 @@ class _CreatorProfileState extends State<CreatorProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white,
       body: SlidingUpPanel(
           borderRadius: BorderRadius.only(
@@ -44,35 +49,37 @@ class _CreatorProfileState extends State<CreatorProfile> {
                 SizedBox(
                   height: getheight(context, 27),
                 ),
-                SingleChildScrollView(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: SingleChildScrollView(
-                      controller: _mycontroller1,
-                      child: Column(
-                        children: [
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                          Notes(
-                              isliked: _isliked_notes,
-                              isbookmarked: _isbookmarked_notes),
-                        ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                        controller: _mycontroller1,
+                        child: Column(
+                          children: [
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                            Notes(
+                                isliked: _isliked_notes,
+                                isbookmarked: _isbookmarked_notes),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -82,10 +89,10 @@ class _CreatorProfileState extends State<CreatorProfile> {
           ),
           body: Column(
             children: [
-              SizedBox(height: getheight(context, 60)),
+              SizedBox(height: getheight(context, 20)),
               Container(
                 padding:
-                    EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+                    EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
                 child: Row(
                   children: [
                     GestureDetector(
@@ -142,7 +149,7 @@ class _CreatorProfileState extends State<CreatorProfile> {
                           children: [
                             Container(
                               height: getheight(context, 84),
-                              width: getheight(context, 84),
+                              width: getheight(context, 80),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(28),
                                   border: Border.all(color: Colors.lightBlue)),
@@ -151,13 +158,15 @@ class _CreatorProfileState extends State<CreatorProfile> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("@joveian"),
+                                Text("@${currentUser.username}"),
+                                SizedBox(height: getheight(context, 2),),
                                 Text(
-                                  "Jovi Daniel",
+                                  currentUser.name,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
+                                 SizedBox(height: getheight(context, 2),),
                                 Container(
                                     width: getwidth(context, 170),
                                     child: Text(

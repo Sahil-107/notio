@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notio/Navbar.dart';
+import 'package:notio/Objects/curUser.dart';
 import 'package:notio/Screens/Auth/ForgotPassword/EnterOTP.dart';
 import 'package:notio/Screens/Auth/ForgotPassword/ResetPassword1.dart';
 import 'package:notio/Screens/Auth/ForgotPassword/ResetPassword2.dart';
@@ -15,6 +16,7 @@ import 'package:notio/Screens/Notifications.dart';
 import 'package:notio/Screens/Story/uploadStory.dart';
 import 'package:notio/Screens/Verification/underVerificationPage.dart';
 import 'package:notio/Screens/Verification/verificationDetails.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Auth/Login.dart';
 import 'Screens/Creator/CreatorProfile.dart';
 import 'Screens/Home.dart';
@@ -25,12 +27,13 @@ void main() {
   runApp(MyApp());
 }
 
+//gloabls
+
+curUser currentUser = curUser();
+late final SharedPreferences prefs;
+
 class MyApp extends StatelessWidget {
   // MaterialColor colorCustom = MaterialColor(0xFF880E4F, color);
-
- 
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
           '/verificationDetails': (context) => Verification(),
           '/verification2': (context) => Verification2(),
           '/creatorProfile': (context) => CreatorProfile(),
-          '/creatorMenu': (context) => CreatorMenu(),
+          // '/creatorMenu': (context) => CreatorMenu(),
           '/newContribution': (context) => NewContribution(),
           '/revenue': (context) => Revenue(),
           '/testing': (context) => newPost(),
