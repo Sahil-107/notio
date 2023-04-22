@@ -32,12 +32,20 @@ class _LoadingState extends State<Loading> {
     prefs = await SharedPreferences.getInstance();
     print(prefs.get("UID"));
     if (prefs.get("UID") != null) {
-      var _token = await _authservices.generateToken("notio_cc");
+      try {
+          var _token = await _authservices.generateToken("notio_cc");
       var _data = await _authservices
           .getUserData({"token": _token.body, "id": prefs.get("UID")});
       print(jsonDecode(_data.body)["Response"]);
       await putData(jsonDecode(_data.body)["Response"]);
       Navigator.pushReplacementNamed(context, '/navbar');
+      } catch (e) {
+        Timer(
+          Duration(seconds: 3),
+          () => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) => Login())));
+      }
+    
     } else {
       Timer(
           Duration(seconds: 3),

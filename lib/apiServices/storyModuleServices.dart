@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class storyServices {
-  String _api_url = "http://192.168.1.2:8080";
+  String _api_url = "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080/";
 
   getStroiesapi(Object body) async {
     return await http.post(
