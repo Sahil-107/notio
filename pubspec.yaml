@@ -50,6 +50,8 @@ dependencies:
   percent_indicator: ^4.2.3
   shared_preferences: ^2.1.0
   image_picker: 0.8.7
+  file_picker: 
+
   
 
 dev_dependencies:
