@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,9 @@ import 'package:notio/Screens/Saved.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
 import 'package:notio/Screens/Search1.dart';
+import 'package:notio/appServices/storyUploadServices.dart';
 import 'package:notio/utility.dart';
-
 import 'Screens/Menu/Menu.dart';
-import 'Screens/Story/uploadStory.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -66,7 +66,13 @@ class _NavbarState extends State<Navbar> {
                           GestureDetector(
                             onTap: () {
                               // Navigator.pushNamed(context, '/uploadStory');
-                              UploadStory(context);
+                              // PickerScreen(context);
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             PickerScreen(context)));
+                              UploadStory().storyUpload(context);
                             },
                             child: Text(
                               "Add Story",

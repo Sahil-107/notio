@@ -49,8 +49,14 @@ dependencies:
   flutter_advanced_switch: ^3.0.1
   percent_indicator: ^4.2.3
   shared_preferences: ^2.1.0
-  image_picker: 0.8.7
+  intl: ^0.18.0
+  insta_assets_picker: ^1.2.2
+  image_picker: ^0.8.7
+  camera_with_files: ^0.0.13
+  image_cropper: ^3.0.3
+  image_picker_plus: ^0.5.5+3
   file_picker: 
+
 
   
 

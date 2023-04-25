@@ -81,8 +81,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       "password": _pass,
       "username": _username
     };
+    print(userObject);
     var res = await _authservices.registerUser(userObject);
-
     setCurUser(int.parse(jsonDecode(res.body)["uid"]));
   }
 

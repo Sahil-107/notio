@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class authServices {
-  String _api_url = "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080/";
+  String _api_url =
+      "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080";
 
   generateToken(String key) async {
     return await http.get(Uri.parse("${_api_url}/token/generate/$key"));
