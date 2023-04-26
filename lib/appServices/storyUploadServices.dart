@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker_plus/image_picker_plus.dart';
 import 'package:video_player/video_player.dart';
 
@@ -14,8 +12,7 @@ class UploadStory {
       source: ImageSource.both,
 
       /// On long tap, it will be available.
-      multiSelection: true,
-
+      // multiSelection: true,
       galleryDisplaySettings:
           GalleryDisplaySettings(cropImage: true, showImagePreview: true),
     );
