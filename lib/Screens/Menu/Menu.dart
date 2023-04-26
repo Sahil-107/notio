@@ -66,7 +66,7 @@ class Menu extends StatelessWidget {
 
                             },
                             child: Image(
-                              image: AssetImage("images/person.png"),
+                              image: NetworkImage(currentUser.profile_image),
                               height: getheight(context, 117),
                               width: getwidth(context, 87),
                             ),

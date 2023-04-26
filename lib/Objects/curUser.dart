@@ -1,5 +1,5 @@
 class curUser {
-  late String _email, _phone, _password, _username;
+  late String _email, _phone, _password, _username, _profile_image;
   late String _name, _branch, _university, _college, _gender;
   late int _sem, _id;
   bool _isverified = false;
@@ -10,6 +10,12 @@ class curUser {
 
   void setuid(int value) {
     _id = value;
+  }
+
+  String get profile_image => _profile_image;
+
+  void setprofile_image(String value) {
+    _profile_image = value;
   }
 
   String get email => _email;

@@ -7,6 +7,7 @@ class storyObject {
   late int _views;
   late int _bolts;
   late int _story_id;
+  late String _bolts_by;
 
   storyObject(
       {required MemoryImage storyItem,
@@ -14,16 +15,22 @@ class storyObject {
       required int views,
       required int bolts,
       required int story_id,
-      required String branch})
+      required String branch,
+      required String bolts_by})
       : _storyItem = storyItem,
         _poster = poster,
         _views = views,
         _bolts = bolts,
         _story_id = story_id,
-        _branch = branch;
+        _branch = branch,
+        _bolts_by = bolts_by;
 
   MemoryImage getstoryItem() {
     return _storyItem;
+  }
+
+  String getBoltsBy() {
+    return _bolts_by;
   }
 
   String getPoster() {
@@ -44,5 +51,9 @@ class storyObject {
 
   String getBranch() {
     return _branch;
+  }
+
+  void setBoltsBy(String bolts_by) {
+    this._bolts_by = bolts_by;
   }
 }

@@ -41,11 +41,11 @@ class _OnboardingState extends State<Onboarding> {
       "isCreator": currentUser.iscreator,
     };
     var res = await authservices.onBoardUser(user);
-    print(jsonDecode(res.body));
-    setCurUser();
+    currentUser.setprofile_image(jsonDecode(res.body)["link"]);
+    await setCurUser();
   }
 
-  setCurUser() {
+  setCurUser() async {
     currentUser.setbranch(branch);
     currentUser.setuniversity(_universityDropdownValue);
     currentUser.setcollege(_collegeDropdownValue);
@@ -275,8 +275,8 @@ class _OnboardingState extends State<Onboarding> {
                   height: getheight(context, 45),
                 ),
                 InkWell(
-                  onTap: () {
-                    onboard();
+                  onTap: () async {
+                    await onboard();
                     Navigator.pushNamed(context, '/navbar');
                   },
                   child: Container(

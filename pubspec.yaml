@@ -56,6 +56,7 @@ dependencies:
   image_cropper: ^3.0.3
   image_picker_plus: ^0.5.5+3
   file_picker: 
+  pull_to_refresh: ^2.0.0
 
 
   

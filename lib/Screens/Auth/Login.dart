@@ -70,6 +70,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     currentUser.setcollege(_data["college"]);
     currentUser.setgender(_data["gender"]);
     currentUser.setsem(_data["sem"]);
+    currentUser.setiscreator(_data["iscreator"]);
+    currentUser.setisverified(_data["isverified"]);
+    currentUser.setprofile_image(_data["profile_image"]);
   }
 
   registerUser() async {
@@ -83,6 +86,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     };
     print(userObject);
     var res = await _authservices.registerUser(userObject);
+    print(res.body);
     setCurUser(int.parse(jsonDecode(res.body)["uid"]));
   }
 

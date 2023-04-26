@@ -1,29 +1,36 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notio/Screens/Story/storyObject.dart';
+import 'package:notio/apiServices/authServices.dart';
+import 'package:notio/apiServices/storyModuleServices.dart';
+import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class demo extends StatefulWidget {
-  demo({required this.stories});
+class storyViewPage extends StatefulWidget {
+  storyViewPage({required this.stories});
   List<storyObject> stories = [];
   @override
-  _demoState createState() => _demoState();
+  _storyViewPageState createState() => _storyViewPageState();
 }
 
-class _demoState extends State<demo> {
-  // Replace this with your own list of stories
-
+class _storyViewPageState extends State<storyViewPage> {
   int currentIndex = 0;
   bool _visible = true;
-  int _time = 10;
+  int _time = 15;
   late Timer _timer;
   double _per = 1.0;
+  storyServices _ss = new storyServices();
 
   @override
   void initState() {
+    _ss.addView({
+      "views": widget.stories[currentIndex].getViews() + 1,
+      "story_id": widget.stories[currentIndex].getStoryId()
+    });
     _timer = Timer.periodic(Duration(seconds: _time), (timer) {
       if (currentIndex < widget.stories.length - 1) {
         setState(() {
@@ -132,8 +139,7 @@ class _demoState extends State<demo> {
                         setState(() {
                           if (currentIndex != 0) {
                             currentIndex--;
-                          }
-                          else{
+                          } else {
                             Navigator.pop(context);
                           }
                         });
@@ -216,11 +222,34 @@ class _demoState extends State<demo> {
               color: Color(0xff222222),
               child: Center(
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (!widget.stories[currentIndex].getBoltsBy().contains(
+                            currentUser.id.toString(),
+                          )) {
+                        String bolts_by =
+                            widget.stories[currentIndex].getBoltsBy();
+                        bolts_by += currentUser.id.toString() + "#";
+                        int bolts = widget.stories[currentIndex].getBolts();
+                        bolts += 1;
+                        var x = await _ss.addBolt({
+                          "bolts_by": bolts_by,
+                          "story_id": widget.stories[currentIndex].getStoryId(),
+                          "bolts": bolts
+                        });
+                        setState(() {
+                          widget.stories[currentIndex]
+                              .setBoltsBy(jsonDecode(x.body)["bolts_by"]);
+                        });
+                      }
+                    },
                     icon: Icon(
                       Icons.bolt_sharp,
                       size: 30,
-                      color: Colors.white,
+                      color: widget.stories[currentIndex]
+                              .getBoltsBy()
+                              .contains(currentUser.id.toString())
+                          ? Colors.amber
+                          : Colors.white,
                     )),
               ),
             ),
