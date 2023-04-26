@@ -30,22 +30,22 @@ class _LoadingState extends State<Loading> {
 
   loadUser() async {
     prefs = await SharedPreferences.getInstance();
-    print(prefs.get("UID"));
+
     if (prefs.get("UID") != null) {
       try {
-          var _token = await _authservices.generateToken("notio_cc");
-      var _data = await _authservices
-          .getUserData({"token": _token.body, "id": prefs.get("UID")});
-      print(jsonDecode(_data.body)["Response"]);
-      await putData(jsonDecode(_data.body)["Response"]);
-      Navigator.pushReplacementNamed(context, '/navbar');
+        var _token = await _authservices.generateToken("notio_cc");
+        var _data = await _authservices
+            .getUserData({"token": _token.body, "id": prefs.get("UID")});
+
+        await putData(jsonDecode(_data.body)["Response"]);
+
+        Navigator.pushReplacementNamed(context, '/navbar');
       } catch (e) {
         Timer(
-          Duration(seconds: 3),
-          () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) => Login())));
+            Duration(seconds: 3),
+            () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (BuildContext context) => Login())));
       }
-    
     } else {
       Timer(
           Duration(seconds: 3),
@@ -65,6 +65,10 @@ class _LoadingState extends State<Loading> {
     currentUser.setcollege(_data["college"]);
     currentUser.setgender(_data["gender"]);
     currentUser.setsem(_data["sem"]);
+    currentUser.setiscreator(_data["iscreator"]);
+    currentUser.setisverified(_data["isverified"]);
+    currentUser.setsem(_data["sem"]);
+    currentUser.setprofile_image(_data["profile_image"]);
   }
 
   @override

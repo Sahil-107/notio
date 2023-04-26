@@ -7,13 +7,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Blogs/blog.dart';
 import 'package:notio/Screens/NoteModule/noteModule.dart';
-import 'package:notio/Screens/Story/demo.dart';
+import 'package:notio/Screens/Story/storyViewPage.dart';
 import 'package:notio/Screens/Story/mainStoryPage.dart';
 import 'package:notio/Screens/Story/storyObject.dart';
 import 'package:notio/apiServices/storyModuleServices.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'package:story_view/story_view.dart';
 import 'package:story_view/widgets/story_view.dart';
@@ -25,6 +26,82 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  List<Widget> _sems = [];
+
+  _addSems() async {
+    _sems = [myStories(sem: currentUser.sem.toString(), stories: 0, storyData: [])];
+    for (var i = 1; i < 9; i++) {
+      var x = await _getStrories(i);
+      _sems.add(Semester(
+          sem: i.toString(), stories: await x[0], storyData: await x[1]));
+      setState(() {});
+    }
+
+    // _sems.sort((a, b) => a.stories.length.compareTo(b.stories.length));
+    // _sems.insert(0, _sems[_sems.length-1]);
+    // _sems.removeAt(_sems.length - 1);
+  }
+
+  Future<List> _getStrories(sem) async {
+    int _stories_len = 0;
+    List<storyObject> _storyData = [];
+    storyServices storyService = new storyServices();
+    var res = await storyService.getStroiesapi({
+      "id": currentUser.id,
+      "sem": sem,
+      "college": currentUser.college,
+      "university": currentUser.university,
+      "branch": currentUser.branch
+    });
+
+    for (var element in jsonDecode(res.body)["Stories"]) {
+      Rx<String> _image = element["image"].toString().obs;
+      // _stories.add(StoryItem.pageProviderImage(
+      //   MemoryImage(
+      //     base64Decode(_image.value),
+      //   ),
+      //   caption: "by: " + element["name"],
+      //   duration: Duration(seconds: 15),
+      // ));
+
+      _stories_len += 1;
+
+      _storyData.add(
+        storyObject(
+            storyItem: MemoryImage(
+              base64Decode(_image.value),
+            ),
+            poster: element["name"],
+            views: element["views"],
+            bolts: element["bolts"],
+            bolts_by: element["bolts_by"],
+            story_id: element["story_id"],
+            branch: element["branch"]),
+      );
+    }
+    return [_stories_len, _storyData];
+  }
+
+  void _onRefresh() async {
+    await _addSems();
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
+
+  @override
+  void initState() {
+    _addSems();
+    setState(() {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,116 +110,98 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue, // Status bar color
       ),
       backgroundColor: bg,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: getheight(context, 20)),
-            Container(
-              height: getheight(context, 80),
-              padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Hi, ${currentUser.name} !"),
-                      SizedBox(height: getheight(context, 10)),
-                      Text(
-                        "Welcome back",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Icon(Icons.notifications)
-                ],
+      body: SmartRefresher(
+        // header: WaterDropHeader(),
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        controller: _refreshController,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: getheight(context, 20)),
+              Container(
+                height: getheight(context, 80),
+                padding:
+                    EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Hi, ${currentUser.name} !"),
+                        SizedBox(height: getheight(context, 10)),
+                        Text(
+                          "Welcome back",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w900),
+                        )
+                      ],
+                    ),
+                    Spacer(),
+                    Icon(Icons.notifications)
+                  ],
+                ),
               ),
-            ),
-            Container(
-              height: getheight(context, 92),
-              margin: EdgeInsets.only(
-                  left: getwidth(context, 10), right: getwidth(context, 10)),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Semester(
-                    sem: 1.toString(),
-                  ),
-                  Semester(
-                    sem: 2.toString(),
-                  ),
-                  Semester(
-                    sem: 3.toString(),
-                  ),
-                  Semester(
-                    sem: 4.toString(),
-                  ),
-                  Semester(
-                    sem: 5.toString(),
-                  ),
-                  Semester(
-                    sem: 6.toString(),
-                  ),
-                  Semester(
-                    sem: 7.toString(),
-                  ),
-                  Semester(
-                    sem: 8.toString(),
-                  ),
-                ],
+              Container(
+                  height: getheight(context, 92),
+                  margin: EdgeInsets.only(
+                      left: getwidth(context, 10),
+                      right: getwidth(context, 10)),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(children: _sems),
+                  )),
+              SizedBox(
+                height: getheight(context, 20),
               ),
-            ),
-            SizedBox(
-              height: getheight(context, 20),
-            ),
-            CarouselSlider(
-              options: CarouselOptions(
-                  clipBehavior: Clip.none,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.7,
-                  height: getheight(context, 280)),
-              items: [{}, {}, {}].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return noteWidget();
-                  },
-                );
-              }).toList(),
-            ),
-            SizedBox(
-              height: getheight(context, 30),
-            ),
-            Center(
-              child: Text(
-                "Might be useful",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              CarouselSlider(
+                options: CarouselOptions(
+                    clipBehavior: Clip.none,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.7,
+                    height: getheight(context, 280)),
+                items: [{}, {}, {}].map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return noteWidget();
+                    },
+                  );
+                }).toList(),
               ),
-            ),
-            SizedBox(
-              height: getheight(context, 17),
-            ),
-            Container(
-              // height: getheight(context, 200),
-              child: Column(
-                children: [
-                  Column(
-                    children: [
-                      ArticleWidget(),
-                      ArticleWidget(),
-                      ArticleWidget(),
-                      ArticleWidget(),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getheight(context, 85),
-                  )
-                ],
+              SizedBox(
+                height: getheight(context, 30),
               ),
-            )
-          ],
+              Center(
+                child: Text(
+                  "Might be useful",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                ),
+              ),
+              SizedBox(
+                height: getheight(context, 17),
+              ),
+              Container(
+                // height: getheight(context, 200),
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        ArticleWidget(),
+                        ArticleWidget(),
+                        ArticleWidget(),
+                        ArticleWidget(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getheight(context, 85),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -270,58 +329,12 @@ class ArticleWidget extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class Semester extends StatefulWidget {
-  Semester({required this.sem});
+class Semester extends StatelessWidget {
+  Semester({required this.sem, required this.stories, required this.storyData});
 
   String sem;
-
-  @override
-  State<Semester> createState() => _SemesterState();
-}
-
-class _SemesterState extends State<Semester> {
-  @override
-  void initState() {
-    _getStrories(int.parse(widget.sem));
-    super.initState();
-  }
-
-  List<StoryItem> _stories = [];
-  List<storyObject> _storyData = [];
-
-  _getStrories(sem) async {
-    storyServices storyService = new storyServices();
-    var res = await storyService.getStroiesapi({
-      "id": currentUser.id,
-      "sem": sem,
-      "college": currentUser.college,
-      "university": currentUser.university,
-      "branch": currentUser.branch
-    });
-    for (var element in jsonDecode(res.body)["Stories"]) {
-      Rx<String> _image = element["image"].toString().obs;
-      _stories.add(StoryItem.pageProviderImage(
-        MemoryImage(
-          base64Decode(_image.value),
-        ),
-        caption: "by: " + element["name"],
-        duration: Duration(seconds: 15),
-      ));
-
-      _storyData.add(
-        storyObject(
-            storyItem: MemoryImage(
-              base64Decode(_image.value),
-            ),
-            poster: element["name"],
-            views: element["views"],
-            bolts: 10,
-            story_id: element["storiy_id"],
-            branch: element["branch"]),
-      );
-    }
-    setState(() {});
-  }
+  int stories;
+  List<storyObject> storyData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -329,12 +342,12 @@ class _SemesterState extends State<Semester> {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await _stories).isNotEmpty) {             
+            if ((await stories)!=0) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => demo(
-                          stories: _storyData,
+                    builder: (context) => storyViewPage(
+                          stories: storyData,
                         )),
               );
             }
@@ -346,10 +359,10 @@ class _SemesterState extends State<Semester> {
                 height: getheight(context, 65),
                 width: getheight(context, 65),
                 padding: EdgeInsets.all(5),
-                child: Image(image: AssetImage("images/sem${widget.sem}.png")),
+                child: Image(image: AssetImage("images/sem$sem.png")),
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: (_stories.isNotEmpty
+                      color: (stories!=0
                           ? Color(0xff376AED)
                           : Colors.grey),
                       width: 3),
@@ -361,7 +374,113 @@ class _SemesterState extends State<Semester> {
                 height: 5,
               ),
               Text(
-                "Semester ${widget.sem}",
+                "Semester $sem",
+                style: TextStyle(fontSize: 10),
+              )
+            ],
+          ),
+          // child: FutureBuilder<List<StoryItem>>(
+          //   future: _stories,
+          //   builder: (BuildContext context,
+          //       AsyncSnapshot<List<StoryItem>> snapshot) {
+          //     if (!snapshot.hasData) {
+          //       return Column(
+          //         children: [
+          //           Container(
+          //             margin: EdgeInsets.only(right: 5, left: 6),
+          //             height: getheight(context, 65),
+          //             width: getheight(context, 65),
+          //             padding: EdgeInsets.all(5),
+          //             child: Image(
+          //                 image: AssetImage("images/sem${widget.sem}.png")),
+          //             decoration: BoxDecoration(
+          //               border: Border.all(
+          //                   color: (snapshot.data!.isNotEmpty
+          //                       ? Color(0xff376AED)
+          //                       : Colors.grey),
+          //                   width: 3),
+          //               borderRadius: BorderRadius.circular(18),
+          //               //image: DecorationImage(image: AssetImage("images/sem1.png")),
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             height: 5,
+          //           ),
+          //           Text(
+          //             "Semester ${widget.sem}",
+          //             style: TextStyle(fontSize: 10),
+          //           )
+          //         ],
+          //       );
+          //     } else {
+          //       return StepProgressIndicator(
+          //         totalSteps: 15,
+          //         currentStep: 12,
+          //         size: 20,
+          //         selectedColor: Colors.amber,
+          //         unselectedColor: Colors.black,
+          //         roundedEdges: Radius.circular(10),
+          //         gradientColor: LinearGradient(
+          //           begin: Alignment.topLeft,
+          //           end: Alignment.bottomRight,
+          //           colors: [Colors.blue, Colors.grey],
+          //         ),
+          //       );
+          //     }
+          //   },
+          // ),
+        ),
+      ],
+    );
+  }
+}
+
+class myStories extends StatelessWidget {
+  myStories({required this.sem, required this.stories, required this.storyData});
+
+  String sem;
+  int stories;
+  List<storyObject> storyData = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () async {
+            if ((await stories)!=0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => storyViewPage(
+                          stories: storyData,
+                        )),
+              );
+            }
+          },
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 5, left: 6),
+                height: getheight(context, 65),
+                width: getheight(context, 65),
+                padding: EdgeInsets.all(5),
+                child: Image(image: NetworkImage(currentUser.profile_image)),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: (stories!=0
+                          ? Color(0xff376AED)
+                          : Colors.grey),
+                      width: 3),
+                  borderRadius: BorderRadius.circular(18),
+                  //image: DecorationImage(image: AssetImage("images/sem1.png")),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "Your Story",
                 style: TextStyle(fontSize: 10),
               )
             ],

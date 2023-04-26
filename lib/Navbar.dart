@@ -8,6 +8,7 @@ import 'package:notio/Screens/Saved.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
 import 'package:notio/Screens/Search1.dart';
+
 import 'package:notio/utility.dart';
 
 import 'Screens/Menu/Menu.dart';
@@ -65,7 +66,6 @@ class _NavbarState extends State<Navbar> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Navigator.pushNamed(context, '/uploadStory');
                               UploadStory(context);
                             },
                             child: Text(
