@@ -32,7 +32,9 @@ class _HomeState extends State<Home> {
   List<Widget> _sems = [];
 
   _addSems() async {
-    _sems = [myStories(sem: currentUser.sem.toString(), stories: 0, storyData: [])];
+    _sems = [
+      myStories(sem: currentUser.sem.toString(), stories: 0, storyData: [])
+    ];
     for (var i = 1; i < 9; i++) {
       var x = await _getStrories(i);
       _sems.add(Semester(
@@ -342,7 +344,7 @@ class Semester extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await stories)!=0) {
+            if ((await stories) != 0) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -362,9 +364,7 @@ class Semester extends StatelessWidget {
                 child: Image(image: AssetImage("images/sem$sem.png")),
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: (stories!=0
-                          ? Color(0xff376AED)
-                          : Colors.grey),
+                      color: (stories != 0 ? Color(0xff376AED) : Colors.grey),
                       width: 3),
                   borderRadius: BorderRadius.circular(18),
                   //image: DecorationImage(image: AssetImage("images/sem1.png")),
@@ -436,7 +436,8 @@ class Semester extends StatelessWidget {
 }
 
 class myStories extends StatelessWidget {
-  myStories({required this.sem, required this.stories, required this.storyData});
+  myStories(
+      {required this.sem, required this.stories, required this.storyData});
 
   String sem;
   int stories;
@@ -448,7 +449,7 @@ class myStories extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await stories)!=0) {
+            if ((await stories) != 0) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -468,9 +469,7 @@ class myStories extends StatelessWidget {
                 child: Image(image: NetworkImage(currentUser.profile_image)),
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: (stories!=0
-                          ? Color(0xff376AED)
-                          : Colors.grey),
+                      color: (stories != 0 ? Color(0xff376AED) : Colors.grey),
                       width: 3),
                   borderRadius: BorderRadius.circular(18),
                   //image: DecorationImage(image: AssetImage("images/sem1.png")),

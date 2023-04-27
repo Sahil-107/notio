@@ -5,6 +5,13 @@ import 'package:http/http.dart' as http;
 class authServices {
   String _api_url =
       "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080";
+<<<<<<< HEAD
+=======
+  
+  // String _api_url =
+  //     "http://192.168.1.2:8080";
+
+>>>>>>> 9736a052048bf1898b1afb07d5d88ed5612259f3
 
   // String _api_url =
   //     "http://192.168.1.2:8080";
