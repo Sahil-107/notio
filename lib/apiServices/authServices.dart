@@ -14,7 +14,7 @@ class authServices {
   }
 
   registerUser(Object newUser) async {
-    print(newUser);
+    // print(newUser);
     return await http.post(Uri.parse("${_api_url}/auth/registerUser"),
         headers: <String, String>{
           'Content-Type': 'application/json',
