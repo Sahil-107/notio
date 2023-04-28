@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../utility.dart';
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
+  Menu({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +62,7 @@ class Menu extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () async {
-                            
                               prefs.clear();
-
                             },
                             child: Image(
                               image: NetworkImage(currentUser.profile_image),
@@ -105,9 +104,15 @@ class Menu extends StatelessWidget {
                             ],
                           ),
                           Spacer(),
-                          Text(
-                            "Edit",
-                            style: TextStyle(color: Colors.blue, fontSize: 14),
+                          GestureDetector(
+                            onTap: () {
+                              EditDialogBox(context);
+                            },
+                            child: Text(
+                              "Edit",
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 14),
+                            ),
                           ),
                           SizedBox(
                             width: getwidth(context, 20),
@@ -153,6 +158,19 @@ class Menu extends StatelessWidget {
               SizedBox(
                 height: getheight(context, 18),
               ),
+              Container(
+                width: getwidth(context, 150),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(40)),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Center(
+                      child: Text(
+                    "Logout",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  )),
+                ),
+              )
 
               // info_containers(context, "Logout", () {}),
               // SizedBox(
@@ -163,6 +181,140 @@ class Menu extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<dynamic> EditDialogBox(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              child: Container(
+                padding: EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Edit Details",
+                        style: TextStyle(
+                            fontSize: getheight(context, 16),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: getheight(context, 10),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: TextFormField(
+                            initialValue: "Sahil Negi",
+                            validator: (value) {
+                              if (value.toString().length < 4 ||
+                                  value.toString().length > 18) {
+                                return "Enter valid Name!";
+                              }
+                              return null;
+                            },
+                            onChanged: ((value) {
+                              // name = value;
+                            }),
+                            style: TextStyle(
+                                fontSize: getheight(context, 17),
+                                fontWeight: FontWeight.bold),
+                            decoration: InputDecoration(
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Icon(
+                                    Icons.person_outlined,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                hintText: "Name",
+                                hintStyle: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.grey.withOpacity(0.5)))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "🇮🇳",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Text(
+                              " +91",
+                            ),
+                            SizedBox(width: 10),
+                            Container(
+                              width: getwidth(context, 178),
+                              child: TextFormField(
+                                  initialValue: "9459301442",
+                                  textAlign: TextAlign.center,
+                                  validator: (value) {
+                                    if (value.toString().length != 10) {
+                                      return "Enter valid Number!";
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (value) {
+                                    // _phone = value;
+                                  },
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                  decoration: InputDecoration(
+                                      hintText: "Phone number",
+                                      hintStyle: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Colors.grey.withOpacity(0.5)))),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: getheight(context, 10),
+                      ),
+                      SizedBox(height: getheight(context, 20)),
+                      GestureDetector(
+                        onTap: () async {
+                          setState(() {
+                            // showSpinner = true;
+                            // print("spinner true");
+                          });
+                        },
+                        child: Container(
+                          height: getheight(context, 50),
+                          width: getwidth(context, 100),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: blueColor),
+                          child: Center(
+                            child: Text(
+                              "Done",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getheight(context, 17)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          });
+        });
   }
 
   Widget info_containers(

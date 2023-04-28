@@ -7,10 +7,10 @@ import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 
 class storyServices {
-  // String _api_url =
-  //     "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080";
+  String _api_url =
+      "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080";
 
-  String _api_url = "http://192.168.1.5:8080";
+  // String _api_url = "http://192.168.1.5:8080";
 
   uploadStory(File file, Object data) async {
     http.MultipartRequest req = http.MultipartRequest(
@@ -20,11 +20,8 @@ class storyServices {
 
     req.files.add(await http.MultipartFile.fromPath("image", file.path));
 
-    final jsonPart = http.MultipartFile.fromString(
-      'data',
-      json.encode(data),
-      contentType: MediaType('application', 'json')
-    );
+    final jsonPart = http.MultipartFile.fromString('data', json.encode(data),
+        contentType: MediaType('application', 'json'));
     req.files.add(jsonPart);
     return await req.send();
   }
