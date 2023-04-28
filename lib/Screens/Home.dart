@@ -73,15 +73,18 @@ class _HomeState extends State<Home> {
 
       _storyData.add(
         storyObject(
-            storyItem: MemoryImage(
-              base64Decode(_image.value),
-            ),
-            poster: element["name"],
-            views: element["views"],
-            bolts: element["bolts"],
-            bolts_by: element["bolts_by"],
-            story_id: element["story_id"],
-            branch: element["branch"]),
+          storyItem: MemoryImage(
+            base64Decode(_image.value),
+          ),
+          poster: element["name"],
+          views: element["views"],
+          bolts: element["bolts"],
+          bolts_by: element["bolts_by"],
+          story_id: element["story_id"],
+          branch: element["branch"],
+          caption: element["caption"],
+          type: element["type"]
+        ),
       );
     }
     return [_stories_len, _storyData];
@@ -350,6 +353,7 @@ class Semester extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => storyViewPage(
                           stories: storyData,
+                          sem: sem.toString(),
                         )),
               );
             }
@@ -455,6 +459,7 @@ class myStories extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => storyViewPage(
                           stories: storyData,
+                          sem: currentUser.sem.toString(),
                         )),
               );
             }

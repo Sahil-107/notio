@@ -11,8 +11,9 @@ import 'package:notio/utility.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class storyViewPage extends StatefulWidget {
-  storyViewPage({required this.stories});
+  storyViewPage({required this.stories, required this.sem});
   List<storyObject> stories = [];
+  String sem;
   @override
   _storyViewPageState createState() => _storyViewPageState();
 }
@@ -106,7 +107,7 @@ class _storyViewPageState extends State<storyViewPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image(
-                              image: AssetImage("images/sem1.png"),
+                              image: AssetImage("images/sem${widget.sem}.png"),
                               height: 35,
                             ),
                             SizedBox(
@@ -214,6 +215,18 @@ class _storyViewPageState extends State<storyViewPage> {
                       ),
                     ),
                   ),
+                Positioned(
+                   
+                    top: getheight(context, 620),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.4)
+
+                  ),
+                  child: Center(child: Text( widget.stories[currentIndex].getCaption(),style: TextStyle(color: Colors.white, fontSize: 17),)),
+                ))
                 ],
               ),
             ),
