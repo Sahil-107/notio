@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:notio/Screens/Auth/Loading.dart';
 import 'package:notio/Screens/Blogs/blog.dart';
 import 'package:notio/Screens/NoteModule/noteModule.dart';
+import 'package:notio/Screens/Story/myStoryPage.dart';
 import 'package:notio/Screens/Story/storyViewPage.dart';
 import 'package:notio/Screens/Story/mainStoryPage.dart';
 import 'package:notio/Screens/Story/storyObject.dart';
@@ -32,15 +33,19 @@ class _HomeState extends State<Home> {
   List<Widget> _sems = [];
 
   _addSems() async {
-    _sems = [
-      myStories(sem: currentUser.sem.toString(), stories: 0, storyData: [])
-    ];
+    _sems = [];
     for (var i = 1; i < 9; i++) {
-      var x = await _getStrories(i);
+      var _storyData = await _getStrories(i);
       _sems.add(Semester(
-          sem: i.toString(), stories: await x[0], storyData: await x[1]));
+          sem: i.toString(),
+          stories: await _storyData[0],
+          storyData: await _storyData[1]));
+      
+      _sems.insert(0, myStories(stories: await _storyData[0], storyData:  await _storyData[1]));
       setState(() {});
     }
+
+    
 
     // _sems.sort((a, b) => a.stories.length.compareTo(b.stories.length));
     // _sems.insert(0, _sems[_sems.length-1]);
@@ -61,30 +66,26 @@ class _HomeState extends State<Home> {
 
     for (var element in jsonDecode(res.body)["Stories"]) {
       Rx<String> _image = element["image"].toString().obs;
-      // _stories.add(StoryItem.pageProviderImage(
-      //   MemoryImage(
-      //     base64Decode(_image.value),
-      //   ),
-      //   caption: "by: " + element["name"],
-      //   duration: Duration(seconds: 15),
-      // ));
-
-      _stories_len += 1;
+      if (!element["viewed_by"]
+          .toString()
+          .contains(currentUser.id.toString())) {
+        _stories_len += 1;
+      }
 
       _storyData.add(
         storyObject(
-          storyItem: MemoryImage(
-            base64Decode(_image.value),
-          ),
-          poster: element["name"],
-          views: element["views"],
-          bolts: element["bolts"],
-          bolts_by: element["bolts_by"],
-          story_id: element["story_id"],
-          branch: element["branch"],
-          caption: element["caption"],
-          type: element["type"]
-        ),
+            storyItem: MemoryImage(
+              base64Decode(_image.value),
+            ),
+            poster: element["name"],
+            views: element["views"],
+            bolts: element["bolts"],
+            bolts_by: element["bolts_by"],
+            story_id: element["story_id"],
+            branch: element["branch"],
+            caption: element["caption"],
+            type: element["type"],
+            viewed_by: element["viewed_by"]),
       );
     }
     return [_stories_len, _storyData];
@@ -347,7 +348,7 @@ class Semester extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await stories) != 0) {
+            if ((await storyData.length) != 0) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -440,10 +441,8 @@ class Semester extends StatelessWidget {
 }
 
 class myStories extends StatelessWidget {
-  myStories(
-      {required this.sem, required this.stories, required this.storyData});
+  myStories({required this.stories, required this.storyData});
 
-  String sem;
   int stories;
   List<storyObject> storyData = [];
 
@@ -453,14 +452,12 @@ class myStories extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () async {
-            if ((await stories) != 0) {
+            if ((await storyData.length) != 0) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => storyViewPage(
-                          stories: storyData,
-                          sem: currentUser.sem.toString(),
-                        )),
+                    builder: (context) => myStoryPage(
+                        stories: storyData, sem: currentUser.sem.toString())),
               );
             }
           },

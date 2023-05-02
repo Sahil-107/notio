@@ -28,14 +28,12 @@ class _storyViewPageState extends State<storyViewPage> {
 
   @override
   void initState() {
-    _ss.addView({
-      "views": widget.stories[currentIndex].getViews() + 1,
-      "story_id": widget.stories[currentIndex].getStoryId()
-    });
+    addStoryView();
     _timer = Timer.periodic(Duration(seconds: _time), (timer) {
       if (currentIndex < widget.stories.length - 1) {
         setState(() {
           currentIndex++;
+          addStoryView();
         });
       } else {
         Navigator.pop(context);
@@ -44,20 +42,25 @@ class _storyViewPageState extends State<storyViewPage> {
     super.initState();
   }
 
+  void addStoryView() {
+    String viewed_by = widget.stories[currentIndex].getViewedBy();
+    if (!viewed_by.contains(currentUser.id.toString())) {
+      viewed_by += currentUser.id.toString() + "#";
+      _ss.addView({
+        "views": widget.stories[currentIndex].getViews() + 1,
+        "story_id": widget.stories[currentIndex].getStoryId(),
+        "viewed_by": viewed_by
+      });
+      widget.stories[currentIndex].setViewedBy(viewed_by);
+    }
+
+    setState(() {});
+  }
+
   @override
   void dispose() {
     _timer.cancel(); // cancel the timer to free up resources
     super.dispose();
-  }
-
-  Future<void> change_story() async {
-    print(currentIndex);
-    if (currentIndex < widget.stories.length - 1) {
-      currentIndex++;
-      change_story();
-    } else {
-      Navigator.pop(context);
-    }
   }
 
   @override
@@ -160,6 +163,7 @@ class _storyViewPageState extends State<storyViewPage> {
                         setState(() {
                           if (currentIndex < widget.stories.length - 1) {
                             currentIndex++;
+                            addStoryView();
                           } else {
                             Navigator.pop(context);
                           }
@@ -215,18 +219,20 @@ class _storyViewPageState extends State<storyViewPage> {
                       ),
                     ),
                   ),
-                Positioned(
-                   
-                    top: getheight(context, 620),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.4)
-
-                  ),
-                  child: Center(child: Text( widget.stories[currentIndex].getCaption(),style: TextStyle(color: Colors.white, fontSize: 17),)),
-                ))
+                  Positioned(
+                      top: getheight(context, 620),
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                        width: MediaQuery.of(context).size.width,
+                        decoration:
+                            BoxDecoration(color: Colors.white.withOpacity(0.4)),
+                        child: Center(
+                            child: Text(
+                          widget.stories[currentIndex].getCaption(),
+                          style: TextStyle(color: Colors.white, fontSize: 17),
+                        )),
+                      ))
                 ],
               ),
             ),

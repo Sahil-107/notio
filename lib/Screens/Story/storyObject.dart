@@ -8,6 +8,7 @@ class storyObject {
   late int _bolts;
   late int _story_id;
   late String _bolts_by;
+  late String _viewed_by;
   late String _caption;
   late String _type;
 
@@ -19,6 +20,7 @@ class storyObject {
       required int story_id,
       required String branch,
       required String bolts_by,
+      required String viewed_by,
       required String caption,
       required String type})
       : _storyItem = storyItem,
@@ -29,7 +31,8 @@ class storyObject {
         _branch = branch,
         _bolts_by = bolts_by,
         _caption = caption,
-        _type  = type;
+        _type = type,
+        _viewed_by = viewed_by;
 
   MemoryImage getstoryItem() {
     return _storyItem;
@@ -37,6 +40,10 @@ class storyObject {
 
   String getBoltsBy() {
     return _bolts_by;
+  }
+
+  String getViewedBy() {
+    return _viewed_by;
   }
 
   String getPoster() {
@@ -65,5 +72,9 @@ class storyObject {
 
   void setBoltsBy(String bolts_by) {
     this._bolts_by = bolts_by;
+  }
+
+  void setViewedBy(String viewed_by) {
+    this._viewed_by = viewed_by;
   }
 }

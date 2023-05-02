@@ -10,7 +10,7 @@ class storyServices {
   // String _api_url =
   //     "http://ec2-43-204-30-204.ap-south-1.compute.amazonaws.com:8080";
 
-  String _api_url = "http://192.168.1.5:8080";
+  String _api_url = "http://192.168.1.2:8080";
 
   uploadStory(File file, Object data) async {
     http.MultipartRequest req = http.MultipartRequest(
