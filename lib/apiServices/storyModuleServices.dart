@@ -20,11 +20,8 @@ class storyServices {
 
     req.files.add(await http.MultipartFile.fromPath("image", file.path));
 
-    final jsonPart = http.MultipartFile.fromString(
-      'data',
-      json.encode(data),
-      contentType: MediaType('application', 'json')
-    );
+    final jsonPart = http.MultipartFile.fromString('data', json.encode(data),
+        contentType: MediaType('application', 'json'));
     req.files.add(jsonPart);
     return await req.send();
   }
