@@ -284,6 +284,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                 onTap: () {
                                   loginUser();
                                   // Navigator.pushNamed(context, '/onboarding');
+                                  // Navigator.pushNamed(context, '/navbar');
                                 },
                                 child: Container(
                                   height: getheight(context, 60),

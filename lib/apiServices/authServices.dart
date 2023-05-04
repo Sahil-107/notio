@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class authServices {
-  String _api_url =
-      "http://192.168.1.2:8080";
-
+  // String _api_url =
+  //     "http://192.168.1.2:8080";
+  String _api_url = "http://3.109.45.59:8080";
   // String _api_url =
   //     "http://192.168.1.5:8080";
 
