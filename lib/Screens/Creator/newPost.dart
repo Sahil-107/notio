@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 
+List<_tagChip> _tags = [];
+
 class newPost extends StatefulWidget {
   const newPost({Key? key}) : super(key: key);
 
@@ -14,7 +16,6 @@ class newPost extends StatefulWidget {
 }
 
 class _newPostState extends State<newPost> {
-  List<Widget> _tags = [];
   String _tag = "";
   String _subject = "Select Subject";
 
@@ -226,19 +227,13 @@ class _newPostState extends State<newPost> {
                           onTap: () {
                             setState(() {
                               if (_tag != "") {
-                                _tags.add(
-                                  _tagChip(
-                                      header: _tag,
-                                      reload: (String chip) {
-                                        print(_tags);
-                                        for (var element in _tags) {
-                                          print(element);
-                                        }
-                                        setState(() {
-                                          _tag = "";
-                                        });
-                                      }),
-                                );
+                                _tags.add(_tagChip(
+                                  header: _tag,
+                                  index: _tags.length,
+                                  screen_reload: () {
+                                    setState(() {});
+                                  },
+                                ));
                               }
                             });
                           },
@@ -351,15 +346,21 @@ class _newPostState extends State<newPost> {
 }
 
 class _tagChip extends StatelessWidget {
-  _tagChip({required this.header, required this.reload});
+  _tagChip(
+      {required this.header, required this.index, required this.screen_reload});
   String header;
-  Function reload;
+  int index;
+  Function screen_reload;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        reload();
+        _tags.removeAt(index);
+        for (var i = index; i < _tags.length; i++) {
+          _tags[i].index -= 1;
+        }
+        screen_reload();
       },
       child: Chip(
         label: Text(

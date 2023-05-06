@@ -36,7 +36,15 @@ class Menu extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Icon(Icons.notifications)
+                    GestureDetector(
+                        onTap: () {
+                          prefs.clear();
+                          Navigator.pushReplacementNamed(context, "/login");
+                        },
+                        child: Icon(
+                          Icons.logout,
+                          color: Colors.blue,
+                        ))
                   ],
                 ),
               ),
@@ -60,15 +68,10 @@ class Menu extends StatelessWidget {
                           SizedBox(
                             width: getwidth(context, 10),
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              prefs.clear();
-                            },
-                            child: Image(
-                              image: NetworkImage(currentUser.profile_image),
-                              height: getheight(context, 117),
-                              width: getwidth(context, 87),
-                            ),
+                          Image(
+                            image: NetworkImage(currentUser.profile_image),
+                            height: getheight(context, 117),
+                            width: getwidth(context, 87),
                           ),
                           SizedBox(
                             width: getwidth(context, 10),
@@ -131,7 +134,6 @@ class Menu extends StatelessWidget {
               info_containers(context, "Creator's Space", () {
                 Navigator.pushNamed(context, '/verificationDetails');
               }),
-
               Visibility(
                 visible: currentUser.iscreator,
                 child: Column(
@@ -158,24 +160,6 @@ class Menu extends StatelessWidget {
               SizedBox(
                 height: getheight(context, 18),
               ),
-              Container(
-                width: getwidth(context, 150),
-                decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(40)),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Center(
-                      child: Text(
-                    "Logout",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  )),
-                ),
-              )
-
-              // info_containers(context, "Logout", () {}),
-              // SizedBox(
-              //   height: getheight(context, 60),
-              // ),
             ],
           ),
         ),

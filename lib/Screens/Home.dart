@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
           stories: await _storyData[0],
           storyData: await _storyData[1]));
       
-      _sems.insert(0, myStories(stories: await _storyData[0], storyData:  await _storyData[1]));
+      // _sems.insert(0, myStories(stories: await _storyData[0], storyData:  await _storyData[1]));
       setState(() {});
     }
 
