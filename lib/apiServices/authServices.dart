@@ -1,21 +1,15 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:notio/keys.dart';
 
 class authServices {
-  // String _api_url =
-  //     "http://192.168.1.2:8080";
-  String _api_url = "http://3.109.45.59:8080";
-  // String _api_url =
-  //     "http://192.168.1.5:8080";
-
   generateToken(String key) async {
-    return await http.get(Uri.parse("${_api_url}/token/generate/$key"));
+    return await http.get(Uri.parse("${api_url}/token/generate/$key"));
   }
 
   registerUser(Object newUser) async {
     // print(newUser);
-    return await http.post(Uri.parse("${_api_url}/auth/registerUser"),
+    return await http.post(Uri.parse("${api_url}/auth/registerUser"),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -23,7 +17,7 @@ class authServices {
   }
 
   onBoardUser(Object newUser) async {
-    return await http.post(Uri.parse("${_api_url}/auth/onBoardUser"),
+    return await http.post(Uri.parse("${api_url}/auth/onBoardUser"),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -31,7 +25,7 @@ class authServices {
   }
 
   getUserData(Object user) async {
-    return await http.post(Uri.parse("${_api_url}/auth/getUserData"),
+    return await http.post(Uri.parse("${api_url}/auth/getUserData"),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
@@ -39,7 +33,7 @@ class authServices {
   }
 
   loginUser(Object user) async {
-    return await http.post(Uri.parse("${_api_url}/auth/login"),
+    return await http.post(Uri.parse("${api_url}/auth/login"),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },

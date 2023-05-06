@@ -29,10 +29,6 @@ class _newPostState extends State<newPost> {
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-   
-
-    
-
     if (result != null) {
       PlatformFile file = result.files.first;
       print('Picked file: ${file.name}');
@@ -372,9 +368,12 @@ class _tagChip extends StatelessWidget {
               color: blueColor, fontWeight: FontWeight.w600, fontSize: 14),
         ),
         side: BorderSide(color: blueColor),
-        avatar: Icon(
-          Icons.cancel,
-          color: blueColor,
+        avatar: GestureDetector(
+          onTap: () {},
+          child: Icon(
+            Icons.cancel,
+            color: blueColor,
+          ),
         ),
         backgroundColor: Colors.transparent,
       ),

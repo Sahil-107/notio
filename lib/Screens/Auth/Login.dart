@@ -7,6 +7,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:notio/Objects/curUser.dart';
 import 'package:notio/apiServices/authServices.dart';
+import 'package:notio/keys.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,7 +39,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   }
 
   loginUser() async {
-    var _token = await _authservices.generateToken("notio_cc");
+    var _token = await _authservices.generateToken(key_word);
     var userObject = {
       "userName": _login_username,
       "password": _login_password,
@@ -51,7 +52,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
 
   loadUser(int uid) async {
     await prefs.setInt("UID", uid);
-    var _token = await _authservices.generateToken("notio_cc");
+    var _token = await _authservices.generateToken(key_word);
     var _data =
         await _authservices.getUserData({"token": _token.body, "id": uid});
     print(jsonDecode(_data.body)["Response"]);
@@ -76,7 +77,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   }
 
   registerUser() async {
-    var _token = await _authservices.generateToken("notio_cc");
+    var _token = await _authservices.generateToken(key_word);
     var userObject = {
       "email": _email,
       "token": _token.body,

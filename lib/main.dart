@@ -18,6 +18,7 @@ import 'package:notio/Screens/Verification/verificationDetails.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Auth/Login.dart';
 import 'Screens/Creator/CreatorProfile.dart';
+import 'Screens/Creator/Wallet.dart';
 import 'Screens/Home.dart';
 import 'Screens/Saved.dart';
 import 'Screens/Subject.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
           '/resetPassword1': (context) => ResetPassword1(),
           '/resetPassword2': (context) => ResetPassword2(),
           '/notifications': (context) => Notifications(),
+          '/wallet': (context) => Wallet(),
         },
         initialRoute: '/loading');
   }
