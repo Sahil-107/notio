@@ -66,36 +66,156 @@ class Wallet extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
-                  height: getheight(context, 20),
+                  height: getheight(context, 40),
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                ////////////////////// ADD Funds//////////////////////////////
+                // Container(
+                //   height: getheight(context, 69),
+                //   width: getwidth(context, 93),
+                //   decoration: BoxDecoration(
+                //       color: Color(0xFF0D253C),
+                //       borderRadius: BorderRadius.circular(12)),
+                //   child: Column(
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.only(top: 5),
+                //         child: Text(
+                //           "Add funds",
+                //           style: TextStyle(color: Colors.white),
+                //         ),
+                //       ),
+                //       Text(
+                //         "+",
+                //         style: TextStyle(
+                //             fontSize: 30,
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.bold),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                ////////////////////// Earned Revenue //////////////////////
+                // Container(
+                //   height: getheight(context, 69),
+                //   width: getwidth(context, 93),
+                //   decoration: BoxDecoration(
+                //       color: Color(0xFF0D253C),
+                //       borderRadius: BorderRadius.circular(12)),
+                //   child: Column(
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.only(top: 5),
+                //         child: Text(
+                //           "Earned Revenue",
+                //           style: TextStyle(color: Colors.white),
+                //         ),
+                //       ),
+                //       Text(
+                //         "Rs. 1500/-",
+                //         style: TextStyle(
+                //             // fontSize: 30,
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.bold),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                ////////////////////// Added Funds
+                // Container(
+                //   height: getheight(context, 69),
+                //   width: getwidth(context, 93),
+                //   decoration: BoxDecoration(
+                //       color: Color(0xFF0D253C),
+                //       borderRadius: BorderRadius.circular(12)),
+                //   child: Column(
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.only(top: 5),
+                //         child: Text(
+                //           "Added Funds",
+                //           style: TextStyle(color: Colors.white),
+                //         ),
+                //       ),
+                //       Text(
+                //         "Rs. 2500/-",
+                //         style: TextStyle(
+                //             // fontSize: 30,
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.bold),
+                //       )
+                //     ],
+                //   ),
+                // )
+                //   ],
+                // )
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      height: getheight(context, 69),
-                      width: getwidth(context, 93),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF0D253C),
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    Container(
-                      height: getheight(context, 69),
-                      width: getwidth(context, 93),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF0D253C),
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    Container(
-                      height: getheight(context, 69),
-                      width: getwidth(context, 93),
-                      decoration: BoxDecoration(
-                          color: Color(0xFF0D253C),
-                          borderRadius: BorderRadius.circular(12)),
+                    Text("Recent Transactions"),
+                    Spacer(),
+                    Text(
+                      "more",
+                      style: TextStyle(color: Colors.blue),
                     )
                   ],
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF0D253C),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    children: [
+                      Withdrawl(),
+                      Withdrawl(),
+                      Withdrawl(),
+                      Withdrawl(),
+                    ],
+                  ),
                 )
               ],
             ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class Withdrawl extends StatelessWidget {
+  const Withdrawl({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Withdrawl",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "11:20 AM, Monday",
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              )
+            ],
+          ),
+          Spacer(),
+          Text(
+            "Rs. 2500/-",
+            style: TextStyle(fontSize: 16, color: Colors.greenAccent),
           )
         ],
       ),
