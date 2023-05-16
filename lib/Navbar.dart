@@ -12,6 +12,7 @@ import 'package:notio/Screens/Search1.dart';
 import 'package:notio/appServices/storyUploadServices.dart';
 import 'package:notio/utility.dart';
 import 'Screens/Menu/Menu.dart';
+import 'Screens/Others/Others_profile.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -24,7 +25,8 @@ class _NavbarState extends State<Navbar> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> screens = [Home(), Saved(), Search(), Menu()];
+    // List<Widget> screens = [Home(), Saved(), Search(), Menu()];
+    List<Widget> screens = [Home(), Saved(), Search(), Others_profile()];
 
     return Scaffold(
       extendBody: true,

@@ -20,6 +20,7 @@ import 'Screens/Auth/Login.dart';
 import 'Screens/Creator/CreatorProfile.dart';
 import 'Screens/Creator/Wallet.dart';
 import 'Screens/Home.dart';
+import 'Screens/Others/Others_profile.dart';
 import 'Screens/Saved.dart';
 import 'Screens/Subject.dart';
 
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
           '/resetPassword2': (context) => ResetPassword2(),
           '/notifications': (context) => Notifications(),
           '/wallet': (context) => Wallet(),
+          '/othersProfile': (context) => Others_profile(),
         },
         initialRoute: '/loading');
   }
