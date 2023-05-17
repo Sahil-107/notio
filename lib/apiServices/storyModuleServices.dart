@@ -29,6 +29,15 @@ class storyServices {
         body: jsonEncode(body));
   }
 
+  getCurUserStories(Object body) async
+  {
+    return await http.post(Uri.parse("$api_url/userStory/getCurUserStories"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(body));
+  }
+
   addBolt(Object body) async {
     return await http.post(Uri.parse("$api_url/userStory/addBolt"),
         headers: <String, String>{

@@ -149,7 +149,7 @@ class _myStoryPageState extends State<myStoryPage> {
     if (!viewed_by.contains(currentUser.id.toString())) {
       viewed_by += currentUser.id.toString() + "#";
       _ss.addView({
-        "views": widget.stories[currentIndex].getViews() + 1,
+        "views": widget.stories[currentIndex].getViews() + 0,
         "story_id": widget.stories[currentIndex].getStoryId(),
         "viewed_by": viewed_by
       });
@@ -363,6 +363,7 @@ class _myStoryPageState extends State<myStoryPage> {
                   Spacer(),
                   Stack(
                     children: [
+                      Text(widget.stories[currentIndex].getBolts().toString(), style: TextStyle(color: Colors.white),),
                       Icon(
                         Icons.bolt_outlined,
                         color: Colors.amber,

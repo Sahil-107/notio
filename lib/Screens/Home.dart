@@ -31,21 +31,49 @@ class _HomeState extends State<Home> {
       RefreshController(initialRefresh: false);
 
   List<Widget> _sems = [];
+  storyServices _storyService = new storyServices();
+
+  _addMyStories() async {
+    var res = await _storyService
+        .getCurUserStories({"uid": currentUser.id.toString()});
+    List<storyObject> _storyData = [];
+    for (var element in jsonDecode(res.body)["Stories"]) {
+      Rx<String> _image = element["image"].toString().obs;
+
+      _storyData.add(
+        storyObject(
+            storyItem: MemoryImage(
+              base64Decode(_image.value),
+            ),
+            poster: currentUser.name,
+            views: element["views"],
+            bolts: element["bolts"],
+            bolts_by: element["bolts_by"],
+            story_id: element["story_id"],
+            branch: currentUser.branch,
+            caption: element["caption"],
+            type: element["type"],
+            viewed_by: element["viewed_by"]),
+      );
+    }
+    _sems.add(myStories(
+        stories: json.decode(res.body)["Stories"].length,
+        storyData: _storyData));
+  }
 
   _addSems() async {
     _sems = [];
+    await _addMyStories();
     for (var i = 1; i < 9; i++) {
       var _storyData = await _getStrories(i);
       _sems.add(Semester(
           sem: i.toString(),
           stories: await _storyData[0],
           storyData: await _storyData[1]));
-      
+
       // _sems.insert(0, myStories(stories: await _storyData[0], storyData:  await _storyData[1]));
       setState(() {});
     }
-
-    
 
     // _sems.sort((a, b) => a.stories.length.compareTo(b.stories.length));
     // _sems.insert(0, _sems[_sems.length-1]);
@@ -55,8 +83,8 @@ class _HomeState extends State<Home> {
   Future<List> _getStrories(sem) async {
     int _stories_len = 0;
     List<storyObject> _storyData = [];
-    storyServices storyService = new storyServices();
-    var res = await storyService.getStroiesapi({
+
+    var res = await _storyService.getStroiesapi({
       "id": currentUser.id,
       "sem": sem,
       "college": currentUser.college,
