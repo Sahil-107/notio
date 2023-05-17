@@ -40,6 +40,8 @@ class _OnboardingState extends State<Onboarding> {
       "isVerified": currentUser.isverified,
       "isCreator": currentUser.iscreator,
     };
+    print(user);
+
     var res = await authservices.onBoardUser(user);
     currentUser.setprofile_image(jsonDecode(res.body)["link"]);
     await setCurUser();

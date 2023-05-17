@@ -369,9 +369,12 @@ class _tagChip extends StatelessWidget {
               color: blueColor, fontWeight: FontWeight.w600, fontSize: 14),
         ),
         side: BorderSide(color: blueColor),
-        avatar: Icon(
-          Icons.cancel,
-          color: blueColor,
+        avatar: GestureDetector(
+          onTap: () {},
+          child: Icon(
+            Icons.cancel,
+            color: blueColor,
+          ),
         ),
         backgroundColor: Colors.transparent,
       ),

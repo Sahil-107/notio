@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:notio/keys.dart';
 
 class authServices {
-  
-
   generateToken(String key) async {
     return await http.get(Uri.parse("${api_url}/token/generate/$key"));
   }

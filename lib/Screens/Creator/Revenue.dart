@@ -33,10 +33,14 @@ class _RevenueState extends State<Revenue> {
       ChartData(2019, 40)
     ];
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white.withOpacity(0.96),
       body: SingleChildScrollView(
         child: Column(children: [
-          SizedBox(height: getheight(context, 60)),
+          SizedBox(height: getheight(context, 20)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
             child: Column(
@@ -49,13 +53,19 @@ class _RevenueState extends State<Revenue> {
                         },
                         child: Icon(Icons.keyboard_arrow_left)),
                     SizedBox(
-                      width: getwidth(context, 30),
+                      width: getwidth(context, 20),
                     ),
                     Text(
                       "Revenue",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                    )
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/wallet");
+                        },
+                        child: Icon(Icons.account_balance_wallet_outlined))
                   ],
                 ),
               ],

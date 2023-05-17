@@ -5,8 +5,6 @@ import 'package:http_parser/http_parser.dart';
 import 'package:notio/keys.dart';
 
 class storyServices {
-  
-
   uploadStory(File file, Object data) async {
     http.MultipartRequest req = http.MultipartRequest(
       'POST',
