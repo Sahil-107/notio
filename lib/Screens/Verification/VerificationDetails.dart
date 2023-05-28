@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notio/Screens/Verification/underVerificationPage.dart';
+import 'package:notio/apiServices/creatorService.dart';
+import 'package:notio/main.dart';
 
 import '../../utility.dart';
 
@@ -10,6 +13,12 @@ class Verification extends StatefulWidget {
 }
 
 class _VerificationState extends State<Verification> {
+  Map<String, Object> _data = {
+    "id": currentUser.id,
+  };
+
+  creatorServices _creatorservices = new creatorServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,9 +78,7 @@ class _VerificationState extends State<Verification> {
                   ),
                   TextField(
                     onChanged: (value) {
-                      setState(() {
-                        // _email = value.replaceAll(" ", "");
-                      });
+                      _data["panName"] = value.toString();
                     },
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -100,10 +107,9 @@ class _VerificationState extends State<Verification> {
                     height: getheight(context, 13),
                   ),
                   TextField(
+                    textCapitalization: TextCapitalization.characters,
                     onChanged: (value) {
-                      setState(() {
-                        // _email = value.replaceAll(" ", "");
-                      });
+                      _data["panNo"] = value.toString();
                     },
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -133,9 +139,7 @@ class _VerificationState extends State<Verification> {
                   ),
                   TextField(
                     onChanged: (value) {
-                      setState(() {
-                        // _email = value.replaceAll(" ", "");
-                      });
+                      _data["dob"] = value.toString();
                     },
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -165,9 +169,7 @@ class _VerificationState extends State<Verification> {
                   ),
                   TextField(
                     onChanged: (value) {
-                      setState(() {
-                        // _email = value.replaceAll(" ", "");
-                      });
+                      _data["phone"] = value.toString();
                     },
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -197,9 +199,7 @@ class _VerificationState extends State<Verification> {
                   ),
                   TextField(
                     onChanged: (value) {
-                      setState(() {
-                        // _email = value.replaceAll(" ", "");
-                      });
+                      _data["upiId"] = value.toString();
                     },
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
@@ -221,8 +221,14 @@ class _VerificationState extends State<Verification> {
                     height: getheight(context, 23),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/creatorProfile');
+                    onTap: () async {
+                      await _creatorservices.onBoardCreator(_data);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => creatorUnderVerification(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: getheight(context, 42),

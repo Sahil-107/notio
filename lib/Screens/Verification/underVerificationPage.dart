@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:notio/main.dart';
 import '../../utility.dart';
 
-class Verification2 extends StatelessWidget {
-  const Verification2({Key? key}) : super(key: key);
+class creatorUnderVerification extends StatelessWidget {
+  const creatorUnderVerification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.blue, // Status bar color
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: getheight(context, 60)),
+          SizedBox(height: getheight(context, 25)),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 40)),
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 20)),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -36,8 +42,7 @@ class Verification2 extends StatelessWidget {
                     // SizedBox(height: getheight(context, 10)),
                   ],
                 ),
-                Spacer(),
-                Icon(Icons.notifications)
+                
               ],
             ),
           ),
@@ -47,7 +52,7 @@ class Verification2 extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 35),
             child: Text(
-              "“Name” we recieved your creator request!!",
+              "“${currentUser.name}” we recieved your creator request!!",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),

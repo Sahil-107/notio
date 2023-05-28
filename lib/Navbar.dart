@@ -1,3 +1,4 @@
+import 'package:double_back_to_close/toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,6 +11,7 @@ import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:notio/Screens/Search.dart';
 import 'package:notio/Screens/Search1.dart';
 import 'package:notio/appServices/storyUploadServices.dart';
+import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 import 'Screens/Menu/Menu.dart';
 import 'Screens/Others/Others_profile.dart';
@@ -26,7 +28,7 @@ class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
     // List<Widget> screens = [Home(), Saved(), Search(), Menu()];
-    List<Widget> screens = [Home(), Saved(), Search(), Others_profile()];
+    List<Widget> screens = [Home(), Saved(), Search(), Menu()];
 
     return Scaffold(
       extendBody: true,
@@ -90,12 +92,16 @@ class _NavbarState extends State<Navbar> {
                         height: getheight(context, 25),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => newPost()));
+                        onTap: () {                          
+                          if (currentUser.iscreator) {
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => newPost()));
+                          } else {
+                            Toast.show("Unautorized access!", context);
+                          }
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

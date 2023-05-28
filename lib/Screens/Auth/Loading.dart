@@ -69,6 +69,8 @@ class _LoadingState extends State<Loading> {
     currentUser.setisverified(_data["isverified"]);
     currentUser.setsem(_data["sem"]);
     currentUser.setprofile_image(_data["profile_image"]);
+    currentUser.setfollowers(_data["followers"]);
+    currentUser.setfollowing(_data["following"]);
   }
 
   @override

@@ -131,7 +131,9 @@ class _CreatorProfileState extends State<CreatorProfile> {
                     margin:
                         EdgeInsets.symmetric(horizontal: getwidth(context, 30)),
                     padding: EdgeInsets.all(getwidth(context, 20)),
+                    
                     decoration: BoxDecoration(
+                     
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white,
                       boxShadow: [
@@ -148,9 +150,11 @@ class _CreatorProfileState extends State<CreatorProfile> {
                         Row(
                           children: [
                             Container(
+                              
                               height: getheight(context, 84),
                               width: getheight(context, 80),
                               decoration: BoxDecoration(
+                                 image: DecorationImage(image: NetworkImage(currentUser.profile_image), fit: BoxFit.scaleDown),
                                   borderRadius: BorderRadius.circular(28),
                                   border: Border.all(color: Colors.lightBlue)),
                             ),

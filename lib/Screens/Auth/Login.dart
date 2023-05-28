@@ -46,7 +46,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       "token": _token.body,
     };
     var res = await _authservices.loginUser(userObject);
-
+    print(res.body);
     loadUser(jsonDecode(res.body)["Data"]["id"]);
   }
 
@@ -74,6 +74,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     currentUser.setiscreator(_data["iscreator"]);
     currentUser.setisverified(_data["isverified"]);
     currentUser.setprofile_image(_data["profile_image"]);
+    currentUser.setfollowers(_data["followers"]);
+    currentUser.setfollowing(_data["following"]);
   }
 
   registerUser() async {

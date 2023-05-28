@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notio/Screens/Creator/CreatorMenu.dart';
+import 'package:notio/Screens/Creator/CreatorProfile.dart';
 import 'package:notio/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utility.dart';
@@ -126,12 +128,11 @@ class Menu extends StatelessWidget {
                       ],
                     )),
                 Positioned(
-                  top: getheight(context, 170),
+                  top: getheight(context, 160),
                   right: 0.0,
                   left: 0.0,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 50),
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Container(                    
+                    margin: EdgeInsets.symmetric(horizontal: getwidth(context, 70)),                    
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.lightBlue,
@@ -145,47 +146,48 @@ class Menu extends StatelessWidget {
                       ],
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        // Column(
-                        //   children: [
-                        //     Text("52",
-                        //         style: TextStyle(
-                        //             color: Colors.white,
-                        //             fontSize: 20,
-                        //             fontWeight: FontWeight.bold)),
-                        //     Text("Contribution",
-                        //         style: TextStyle(
-                        //             color: Colors.white,
-                        //             fontWeight: FontWeight.bold))
-                        //   ],
-                        // ),
-                        Column(
-                          children: [
-                            Text("250",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                            Text("   Following   ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold))
-                          ],
+                      
+                      children: [                      
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 14),
+                            decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(12),
+                              color: Color(0xff2151CD)
+                            ),
+                            child: Column(
+                              children: [
+                                Text((currentUser.followers.split("#").length-1).toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                                Text("   Followers   ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                        ),                                        
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 14),
+                            child: Column(
+                              children: [
+                                Text((currentUser.following.split("#").length-1).toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)),
+                                Text("   Following   ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
                         ),
-                        Column(
-                          children: [
-                            Text("4.5K",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                            Text("     Likes     ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold))
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -203,7 +205,15 @@ class Menu extends StatelessWidget {
               height: getheight(context, 18),
             ),
             info_containers(context, "Creator's Space", () {
-              Navigator.pushNamed(context, '/verificationDetails');
+              if(currentUser.iscreator)
+              {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatorProfile()));
+              }
+              else
+              {
+                Navigator.pushNamed(context, '/verificationDetails');
+              }
+              
             }),
             Visibility(
               visible: currentUser.iscreator,

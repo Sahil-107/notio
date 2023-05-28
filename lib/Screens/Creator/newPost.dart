@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:notio/Screens/Creator/subjectObject.dart';
+import 'package:notio/Screens/Subject.dart';
+import 'package:notio/apiServices/notesService.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 
@@ -17,11 +22,11 @@ class newPost extends StatefulWidget {
 
 class _newPostState extends State<newPost> {
   String _tag = "";
-  String _subject = "Select Subject";
+  subjectObject _subject = subjectObject("Select Subject", -1);
+  List<subjectObject> _subjects = [subjectObject("Select Subject", -1)];
+  int _sem = 0;
 
-  List<String> _subjects = ["Select Subject", "VLSI", "DSA"];
-
-  int _sem = 4;
+  notesServices _noterSevice = new notesServices();
 
   bool _visible = false;
 
@@ -104,88 +109,123 @@ class _newPostState extends State<newPost> {
                       fontWeight: FontWeight.w500)),
             ),
           ),
-          SizedBox(
-            height: getheight(context, 16),
-          ),
+          
 
           //area 51
 
-          Container(
-            margin: EdgeInsets.fromLTRB(
+          Padding(
+            padding: EdgeInsets.fromLTRB(
                 getwidth(context, 20), 0, getwidth(context, 20), 0),
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.grey, width: 1.0),
-              ),
-            ),
-            child: DropdownButtonFormField<int>(
-              menuMaxHeight: 260,
-              value: _sems[0],
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.leaderboard),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide.none),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide.none),
-                  // filled: true,
-                  fillColor: Colors.white),
-              icon: const Icon(Icons.keyboard_arrow_down),
-              elevation: 16,
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.normal),
-              onChanged: (newValue) {
-                _sem = newValue!;
-                setState(() {
-                  _visible = true;
-                });
-              },
-              items: _sems.map<DropdownMenuItem<int>>((value) {
-                return DropdownMenuItem<int>(
-                  value: value,
-                  child: Text(value.toString()),
-                );
-              }).toList(),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.class_,
+                  color: Colors.grey,
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(getwidth(context, 16), 0, 0, 0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey, width: 1.0),
+                      ),
+                    ),
+                    child: DropdownButtonFormField<int>(
+                      menuMaxHeight: 260,
+                      value: _sems[0],
+                      decoration: InputDecoration(
+                          // prefixIcon: Icon(Icons.leaderboard),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide.none),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide.none),
+                          // filled: true,
+                          fillColor: Colors.white),
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                      elevation: 16,
+                      style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.normal),
+                      onChanged: (newValue) async {
+                        _sem = await newValue!;
+                        _subjects = [subjectObject("Select Subject", -1)];
+                        var data = await _noterSevice.getSubjects(
+                            {"course": currentUser.branch, "sem": _sem});
+                        print(data.body);
+                        for (var element in jsonDecode(data.body)["Notes"]) {
+                          _subjects.add(subjectObject(
+                              element["subject_name"], element["subject_id"]));
+                        }
+                        setState(() {
+                          _visible = true;
+                        });
+                      },
+                      items: _sems.map<DropdownMenuItem<int>>((value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
 
           Visibility(
             visible: _visible,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
                   getwidth(context, 20), 0, getwidth(context, 20), 0),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colors.grey, width: 1.0),
-                ),
-              ),
-              child: DropdownButtonFormField<String>(
-                menuMaxHeight: 260,
-                value: _subject,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.subject),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide.none),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide.none),
-                    // filled: true,
-                    fillColor: Colors.white),
-                icon: const Icon(Icons.keyboard_arrow_down),
-                elevation: 16,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.normal),
-                onChanged: (newValue) {
-                  _subject = newValue!;
-                },
-                items: _subjects.map<DropdownMenuItem<String>>((value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.subject,
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: Container(                     
+                      margin:
+                          EdgeInsets.fromLTRB(getwidth(context, 16), 0, 0, 0),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                      ),
+                      child: DropdownButtonFormField<subjectObject>(
+                        menuMaxHeight: 260,
+                        value: _subjects[0],
+                        hint: Text("Select a subject"),
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25),
+                                borderSide: BorderSide.none),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25),
+                                borderSide: BorderSide.none),
+                            // filled: true,
+                            fillColor: Colors.white),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        elevation: 16,
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.normal),
+                        onChanged: (value) {
+                          setState(() {
+                            _subject = value!;
+                          });
+                        },
+                        items: _subjects.map((subjectObject subject) {
+                          return DropdownMenuItem<subjectObject>(
+                            value: subject,
+                            child: Text(subject.subjectName),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
