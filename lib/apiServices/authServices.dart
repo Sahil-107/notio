@@ -4,7 +4,8 @@ import 'package:notio/keys.dart';
 
 class authServices {
   generateToken(String key) async {
-    return await http.get(Uri.parse("${api_url}/token/generate/$key"));
+   var _token = await http.get(Uri.parse("${api_url}/token/generate/$key"));
+   return jsonDecode(_token.body)["Response"];
   }
 
   registerUser(Object newUser) async {

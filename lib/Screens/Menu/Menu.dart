@@ -16,7 +16,7 @@ class Menu extends StatelessWidget {
         toolbarHeight: 0,
         backgroundColor: Colors.blue, // Status bar color
       ),
-      backgroundColor: Colors.white.withOpacity(0.4),
+      backgroundColor: Color(0xffF5F5F8),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,6 +48,7 @@ class Menu extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20,),
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -131,8 +132,9 @@ class Menu extends StatelessWidget {
                   top: getheight(context, 160),
                   right: 0.0,
                   left: 0.0,
-                  child: Container(                    
-                    margin: EdgeInsets.symmetric(horizontal: getwidth(context, 70)),                    
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: getwidth(context, 70)),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.lightBlue,
@@ -146,18 +148,19 @@ class Menu extends StatelessWidget {
                       ],
                     ),
                     child: Row(
-                      
-                      children: [                      
+                      children: [
                         Expanded(
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 14),
                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(12),
-                              color: Color(0xff2151CD)
-                            ),
+                                borderRadius: BorderRadius.circular(12),
+                                color: Color(0xff2151CD)),
                             child: Column(
                               children: [
-                                Text((currentUser.followers.split("#").length-1).toString(),
+                                Text(
+                                    (currentUser.followers.split("#").length -
+                                            1)
+                                        .toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
@@ -169,13 +172,16 @@ class Menu extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ),                                        
+                        ),
                         Expanded(
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 14),
                             child: Column(
                               children: [
-                                Text((currentUser.following.split("#").length-1).toString(),
+                                Text(
+                                    (currentUser.following.split("#").length -
+                                            1)
+                                        .toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
@@ -205,15 +211,12 @@ class Menu extends StatelessWidget {
               height: getheight(context, 18),
             ),
             info_containers(context, "Creator's Space", () {
-              if(currentUser.iscreator)
-              {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>CreatorProfile()));
-              }
-              else
-              {
+              if (currentUser.iscreator) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CreatorProfile()));
+              } else {
                 Navigator.pushNamed(context, '/verificationDetails');
               }
-              
             }),
             Visibility(
               visible: currentUser.iscreator,

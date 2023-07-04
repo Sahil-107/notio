@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:double_back_to_close/toast.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -11,8 +13,6 @@ import 'package:notio/apiServices/notesService.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
 
-List<_tagChip> _tags = [];
-
 class newPost extends StatefulWidget {
   const newPost({Key? key}) : super(key: key);
 
@@ -20,29 +20,42 @@ class newPost extends StatefulWidget {
   State<newPost> createState() => _newPostState();
 }
 
+//global bcs used by whole screen but still private for this file only
+List<_tagChip> _tags = [];
+
 class _newPostState extends State<newPost> {
   String _tag = "";
   subjectObject _subject = subjectObject("Select Subject", -1);
   List<subjectObject> _subjects = [subjectObject("Select Subject", -1)];
   int _sem = 0;
-
   notesServices _noterSevice = new notesServices();
-
   bool _visible = false;
-
   List<int> _sems = new List<int>.generate(currentUser.sem, (i) => i + 1);
+  late PlatformFile _file;
+
+  TextEditingController _discC = new TextEditingController();
 
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
-      PlatformFile file = result.files.first;
-      print('Picked file: ${file.name}');
+      _file = result.files.first;
+      print('Picked file: ${_file.name}');
     } else {}
   }
 
   @override
   Widget build(BuildContext context) {
+    Map _noteData = {
+      "uid": currentUser.id,
+      "sem": _sem,
+      "subject": _subject.subjectName,
+      "course": currentUser.branch,
+      "disc": _discC.text,
+      "title": "",
+      "tags": "",
+    };
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -84,6 +97,9 @@ class _newPostState extends State<newPost> {
             margin: EdgeInsets.fromLTRB(
                 getwidth(context, 20), 0, getwidth(context, 20), 0),
             child: TextField(
+              onChanged: ((value) {
+                _noteData["title"] = value;
+              }),
               decoration: InputDecoration(
                   icon: Icon(Icons.copy),
                   hintText: "Title for you Notes.",
@@ -100,6 +116,7 @@ class _newPostState extends State<newPost> {
             margin: EdgeInsets.fromLTRB(
                 getwidth(context, 20), 0, getwidth(context, 20), 0),
             child: TextField(
+              controller: _discC,
               decoration: InputDecoration(
                   icon: Icon(Icons.description),
                   hintText: "One line discription.",
@@ -109,7 +126,6 @@ class _newPostState extends State<newPost> {
                       fontWeight: FontWeight.w500)),
             ),
           ),
-          
 
           //area 51
 
@@ -150,10 +166,13 @@ class _newPostState extends State<newPost> {
                       onChanged: (newValue) async {
                         _sem = await newValue!;
                         _subjects = [subjectObject("Select Subject", -1)];
-                        var data = await _noterSevice.getSubjects(
-                            {"course": currentUser.branch, "sem": _sem});
-                        print(data.body);
-                        for (var element in jsonDecode(data.body)["Notes"]) {
+                        var data = await _noterSevice.getSubjects({
+                          "course": currentUser.branch,
+                          "sem": _sem,
+                          "home_screen": "False"
+                        });
+
+                        for (var element in jsonDecode(data.body)["Subjects"]) {
                           _subjects.add(subjectObject(
                               element["subject_name"], element["subject_id"]));
                         }
@@ -186,7 +205,7 @@ class _newPostState extends State<newPost> {
                     color: Colors.grey,
                   ),
                   Expanded(
-                    child: Container(                     
+                    child: Container(
                       margin:
                           EdgeInsets.fromLTRB(getwidth(context, 16), 0, 0, 0),
                       decoration: BoxDecoration(
@@ -355,8 +374,22 @@ class _newPostState extends State<newPost> {
           //
           Spacer(),
           GestureDetector(
-            onTap: () {
-              ////////// SUBMIT
+            onTap: () async {
+              String _tagss = "";
+              for (var element in _tags) {
+                _tagss += "#";
+                _tagss += element.header;
+              }
+              _noteData["tags"] = await _tagss;
+              var res = await _noterSevice.uploadNote(File(_file.path!), _noteData);
+
+              if (res.statusCode == 200) {
+                var body = await res.stream.transform(utf8.decoder).join();
+                Toast.show(jsonDecode(body)["Response"], context);
+              } else {
+                Toast.show(
+                    'Request failed with status: ${res.statusCode}', context);
+              }
             },
             child: Center(
               child: Container(

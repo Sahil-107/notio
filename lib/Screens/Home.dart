@@ -11,6 +11,7 @@ import 'package:notio/Screens/Story/myStoryPage.dart';
 import 'package:notio/Screens/Story/storyViewPage.dart';
 import 'package:notio/Screens/Story/mainStoryPage.dart';
 import 'package:notio/Screens/Story/storyObject.dart';
+import 'package:notio/apiServices/appServices.dart';
 import 'package:notio/apiServices/storyModuleServices.dart';
 import 'package:notio/main.dart';
 import 'package:notio/utility.dart';
@@ -32,6 +33,29 @@ class _HomeState extends State<Home> {
 
   List<Widget> _sems = [];
   storyServices _storyService = new storyServices();
+  appServices _appServices = new appServices();
+
+  List _subjects = [];
+
+  _addSubjects() async {
+    _subjects = [];
+    var data = await _appServices.getSubjects({
+      "course": currentUser.branch,
+      "sem": currentUser.sem,
+      "home_screen": "True"
+    });
+
+    for (var element in jsonDecode(data.body)["Subjects"]) {
+      Rx<String> _image = element["image"].toString().obs;
+      _subjects.add({
+        "image": _image,
+        "subject": element["subject_name"],
+        "subject_id": element["subject_id"]
+      });
+    } 
+
+    setState(() {});
+  }
 
   _addMyStories() async {
     var res = await _storyService
@@ -121,6 +145,7 @@ class _HomeState extends State<Home> {
 
   void _onRefresh() async {
     await _addSems();
+
     _refreshController.refreshCompleted();
   }
 
@@ -132,6 +157,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     _addSems();
+    _addSubjects();
     setState(() {});
     super.initState();
   }
@@ -196,10 +222,12 @@ class _HomeState extends State<Home> {
                     enlargeCenterPage: true,
                     viewportFraction: 0.7,
                     height: getheight(context, 280)),
-                items: [{}, {}, {}].map((i) {
+                items: _subjects.map((noteData) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return noteWidget();
+                      return noteWidget(
+                        data: noteData,
+                      );
                     },
                   );
                 }).toList(),
@@ -243,9 +271,9 @@ class _HomeState extends State<Home> {
 }
 
 class noteWidget extends StatelessWidget {
-  const noteWidget({
-    Key? key,
-  }) : super(key: key);
+  Map data;
+  noteWidget({required this.data});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -267,7 +295,10 @@ class noteWidget extends StatelessWidget {
               ),
             ],
             image: DecorationImage(
-                image: AssetImage('images/chip2.jpg'), fit: BoxFit.cover),
+                image: MemoryImage(
+                  base64Decode(data["image"].value),
+                ),
+                fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(28)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,13 +307,18 @@ class noteWidget extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(
                   getwidth(context, 25), 0, 0, getheight(context, 20)),
-              width: getwidth(context, 170),
-              child: Text(
-                "VLSI Technology",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.black.withOpacity(0.6)),
+                child: Text(
+                  data["subject"],
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800),
+                ),
               ),
             ),
           ],

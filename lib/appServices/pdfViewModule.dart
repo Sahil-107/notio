@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:notio/utility.dart';
+
+class PdfViewModule extends StatefulWidget {
+  PdfViewModule({required this.url, required this.title});
+
+  String url, title;
+
+  @override
+  State<PdfViewModule> createState() => _PdfViewModuleState();
+}
+
+class _PdfViewModuleState extends State<PdfViewModule> {
+  @override
+  void initState() {
+    secure();
+    super.initState();
+  }
+
+  Future<void> secure() async {
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+
+  @override
+  dispose() {
+    FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+    super.dispose();
+  }
+
+  Color _bg_color = Colors.white;
+  Color _border_color = Colors.black;
+  bool _dark_mode = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+      ),
+      backgroundColor: _bg_color,
+      body: Column(
+        children: [
+          SizedBox(
+            height: getheight(context, 20),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getwidth(context, 26)),
+            child: Row(
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                      color: blueColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+                Spacer(),
+                Switch(
+                    value: _dark_mode,
+                    onChanged: (val) {
+                      setState(() {
+                        _dark_mode = val;
+                        var temp = _bg_color;
+                        _bg_color = _border_color;
+                        _border_color = temp;
+                      });
+                    })
+              ],
+            ),
+          ),
+          SizedBox(
+            height: getheight(context, 10),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: _border_color, width: 4)),
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: PDF(
+              enableSwipe: true,
+              swipeHorizontal: true,
+              autoSpacing: false,
+              pageFling: false,
+              nightMode: _dark_mode,
+              onError: (error) {
+                print(error.toString());
+              },
+              onPageError: (page, error) {
+                print('$page: ${error.toString()}');
+              },
+            ).cachedFromUrl(
+                widget.url),
+          ),
+        ],
+      ),
+    );
+  }
+}

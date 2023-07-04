@@ -35,11 +35,11 @@ class _LoadingState extends State<Loading> {
       try {
         var _token = await _authservices.generateToken("notio_cc");
         var _data = await _authservices
-            .getUserData({"token": _token.body, "id": prefs.get("UID")});
+            .getUserData({"token": _token, "id": prefs.get("UID")});
 
         await putData(jsonDecode(_data.body)["Response"]);
 
-        Navigator.pushReplacementNamed(context, '/navbar');
+        Navigator.pushReplacementNamed(context, '/questionPaperModule');
       } catch (e) {
         Timer(
             Duration(seconds: 3),
